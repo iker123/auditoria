@@ -67,8 +67,8 @@ header{
 .nav{max-width:1150px}
 .brand{color:#075c43 !important}
 .brand span{color:#d9272e !important}
-.topscore{color:#075c43 !important}
-main{background:#fff}
+.topscore{color:#075c43 !important;font-size:15px}
+main{background:#fff;overflow-x:hidden}
 .card,.concept,.review-card,.question{
   background:#fff !important;
   color:#173f34 !important;
@@ -163,6 +163,184 @@ footer{
   color:#fff !important;
   border-top:4px solid #d9272e !important;
 }
+
+/* ===== AJUSTES DE LEGIBILIDAD Y RESPONSIVIDAD ===== */
+.hero .concepts,
+.hero .concept{
+  min-width:0 !important;
+}
+.hero .concepts{
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:10px !important;
+}
+.hero .concept{
+  min-width:0 !important;
+  overflow:hidden !important;
+}
+.hero .concept h3,
+.hero .concept p,
+.review-card h3,
+.review-card p{
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+.hero .concept h3{
+  font-size:14px !important;
+  line-height:1.18 !important;
+}
+.hero .concept p{
+  font-size:12px !important;
+  line-height:1.35 !important;
+}
+.hero h1 span{
+  color:#d9272e !important;
+}
+.brand small{
+  color:#6a7a73 !important;
+}
+@media(max-width:1050px){
+  .hero{grid-template-columns:1fr !important}
+  .hero .concepts{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+}
+@media(max-width:620px){
+  .hero .concepts,
+  .concepts,
+  .review-grid{
+    grid-template-columns:1fr !important;
+  }
+  .hero h1{font-size:40px !important}
+}
+
+/* === AJUSTE DE LEGIBILIDAD Y HOVER === */
+button, select, input, textarea {
+  font-family: inherit;
+}
+
+button {
+  color: #12352b;
+}
+
+button:hover,
+button:focus-visible {
+  color: #ffffff !important;
+}
+
+.review-card:hover,
+.review-card:focus-visible,
+.concept:hover,
+.concept:focus-visible,
+.review-step:hover,
+.review-step:focus-visible {
+  color: #ffffff !important;
+  background: #08744f !important;
+  border-color: #08744f !important;
+}
+
+.review-card:hover h3,
+.review-card:hover p,
+.review-card:focus-visible h3,
+.review-card:focus-visible p,
+.concept:hover h3,
+.concept:hover p,
+.concept:focus-visible h3,
+.concept:focus-visible p,
+.review-step:hover,
+.review-step:focus-visible {
+  color: #ffffff !important;
+}
+
+/* Tarjetas del recordatorio: más contraste y sin texto cortado */
+.review-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.review-card {
+  min-width: 0 !important;
+  overflow: visible !important;
+  color: #17382e !important;
+  background: #f7fbf9 !important;
+  border: 1px solid #b8d7c9 !important;
+}
+
+.review-card h3,
+.review-card p {
+  color: #17382e !important;
+  overflow-wrap: anywhere;
+}
+
+.review-card p {
+  line-height: 1.45 !important;
+}
+
+/* Botones de repaso */
+.review-step {
+  color: #17382e !important;
+  background: #f4faf7 !important;
+  border: 1px solid #b8d7c9 !important;
+}
+
+/* Botones de conceptos */
+.concept {
+  color: #17382e !important;
+}
+
+/* La frase principal debe tener contraste alto */
+.hero-title,
+.hero h1,
+.hero .title,
+.lead-title {
+  color: #08744f !important;
+}
+
+/* Botón principal: texto siempre legible */
+button.primary,
+.btn-primary,
+#startBtn,
+#enterBtn {
+  color: #ffffff !important;
+}
+
+button.primary:hover,
+.btn-primary:hover,
+#startBtn:hover,
+#enterBtn:hover {
+  background: #b51f2a !important;
+  color: #ffffff !important;
+}
+
+/* Inputs y selects */
+input::placeholder,
+textarea::placeholder {
+  color: #65756f !important;
+  opacity: 1 !important;
+}
+
+input, textarea, select {
+  color: #17382e !important;
+  background: #ffffff !important;
+}
+
+/* Si algún texto está dentro de spans/bold, conservar contraste */
+.review-card:hover *,
+.review-card:focus-visible *,
+.concept:hover *,
+.concept:focus-visible * {
+  color: #ffffff !important;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .review-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .review-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -173,7 +351,7 @@ footer{
 <div class="hero">
 <div class="card">
 <div class="eyebrow">AUDITORÍA DE SISTEMAS · PRÁCTICA 01</div>
-<h1>El control dice que funciona.<br><span style="color:var(--cyan)">Tú debes demostrarlo.</span></h1>
+<h1>El control dice que funciona.<br><span style="color:var(--cyan)"><span style="color:#08744f !important;">Tú debes demostrarlo.</span></span></h1>
 <p class="lead">En esta misión trabajarás como auditor. No basta con reconocer un control: tendrás que leer el caso, separar pistas útiles de información irrelevante, revisar evidencias, probar el control y documentar un hallazgo.</p>
 <div class="two">
 <label><b>Grupo</b>
