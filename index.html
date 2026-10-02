@@ -50,6 +50,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 .section-title-uda{display:flex;align-items:center;gap:10px}
 .section-title-uda:before{content:"";width:7px;height:28px;background:var(--red);display:inline-block;border-radius:2px}
 @media(max-width:800px){.review-grid{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}}
+.answer-review{display:grid;gap:10px;margin-top:12px}.answer-item{padding:12px;border:1px solid #29415f;border-radius:10px;background:#0a1726}.answer-item strong{display:block;margin-bottom:5px}.answer-item .right{color:#71e3a0}.answer-item .chosen{color:#ffd166}.lock-card{border:1px solid #2f6f50;background:#0b1d18}.option.selected{border-color:var(--yellow);background:#26351c;box-shadow:0 0 0 1px rgba(255,209,102,.25)}
 </style>
 </head>
 <body>
@@ -222,8 +223,12 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <div class="card"><div class="eyebrow">PUNTAJE</div><div class="final-score" id="finalScore"></div><p id="finalBreakdown"></p></div>
 <div class="card"><div class="eyebrow">DICTAMEN</div><h2 id="finalVerdict"></h2><p id="finalSummary" class="lead"></p></div>
 </div>
-<div class="card" style="margin-top:15px"><div class="eyebrow">SIGUIENTE PASO</div><h3>📤 Entrega del grupo</h3><p>Para que el docente pueda corregir en tiempo real, <b>copien su dictamen final y envíenlo mediante el formulario de entrega de la clase</b>. En la versión publicada, el botón de entrega puede apuntar directamente a Google Forms.</p><div class="note">El laboratorio calcula una puntuación orientativa. La calificación docente se basa en la calidad del análisis y del hallazgo.</div></div>
-<button onclick="location.reload()" style="margin-top:15px">VOLVER A INICIAR</button>
+<div class="card" style="margin-top:15px">
+<div class="eyebrow">RETROALIMENTACIÓN FINAL</div>
+<h3>🔎 Revisión del análisis</h3>
+<div id="finalReview"></div>
+</div>
+<div class="note good" style="margin-top:15px">🔒 Esta auditoría ya fue registrada. Al recargar la página, el laboratorio conservará el resultado y no permitirá iniciar una nueva auditoría desde este dispositivo.</div>
 </div>
 </section>
 </main>
@@ -274,20 +279,36 @@ const companies=[
 ["🧪","Prueba histórica","Últimos 30 días: 4 casos similares<br><b>0 alertas automáticas</b>"]]}
 ];
 
-let name="",company=null,opened=0,answers={control:false,test:false,verdict:false},score=0;
+let name="",company=null,companyIndex=null,opened=0,answers={control:false,test:false,verdict:false,controlIndex:null,testIndex:null,verdictValue:null},score=0,submitted=false;
 function show(id){["intro","choose","mission","final"].forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"});}
 function start(){
-name=document.getElementById("studentName").value.trim();
 const g=document.getElementById("groupName").value;
+name=document.getElementById("studentName").value.trim();
 if(!g){alert("Selecciona tu grupo.");return}
 if(!name){alert("Escribe los nombres de los integrantes.");return}
+const saved=JSON.parse(localStorage.getItem("auditLab_"+g)||"null");
+if(saved && saved.submitted){
+restoreSubmitted(saved);
+return;
+}
+if(saved && saved.started){
+if(!confirm("Este grupo ya tiene una auditoría iniciada en este dispositivo. ¿Desean continuarla?")) return;
+restoreActive(saved);
+return;
+}
+saveState({started:true,submitted:false,group:g,name,score:0});
 renderCompanies();show("choose");
 }
 function renderCompanies(){document.getElementById("companies").innerHTML=companies.map((c,i)=>`<div class="card company" onclick="selectCompany(${i})"><span class="tag">${c.tag}</span><h3>${c.title}</h3><p>${c.meta}</p><p>${c.context}</p><button class="secondary">AUDITAR ESTA EMPRESA →</button></div>`).join("");}
-function selectCompany(i){company=companies[i];score=0;opened=0;answers={control:false,test:false,verdict:false};renderMission();show("mission");}
+function selectCompany(i){
+companyIndex=i; company=companies[i]; score=0; opened=0;
+answers={control:false,test:false,verdict:false,controlIndex:null,testIndex:null,verdictValue:null};
+saveState({started:true,submitted:false,group:document.getElementById("groupName").value,name,companyIndex:i,opened,answers,score});
+renderMission();show("mission");
+}
 function renderMission(){
-document.getElementById("headerScore").textContent=`${score} / 20 pts`;
-document.getElementById("livePoints").textContent=`${score} / 20`;
+document.getElementById("headerScore").textContent=`PROGRESO`;
+document.getElementById("livePoints").textContent=`EN ANÁLISIS`;
 document.getElementById("missionNo").textContent=`MISIÓN · ${company.tag}`;
 document.getElementById("missionTitle").textContent=company.title;
 document.getElementById("missionMeta").textContent=company.meta;
@@ -304,10 +325,35 @@ document.getElementById("verdictOptions").innerHTML=[["yes","🟢 El control cum
 ["condition","criterion","cause","effect","recommendation"].forEach(x=>document.getElementById(x).value="");
 document.getElementById("controlFeedback").className="note hidden";document.getElementById("testFeedback").className="note hidden";document.getElementById("verdictFeedback").className="note hidden";document.getElementById("submitMsg").className="note hidden";
 }
-function openEvidence(i){opened++;let e=company.evidence[i];let d=document.getElementById("detail");d.className="note";d.innerHTML=`<b>${e[0]} ${e[1]}</b><br><br>${e[2]}`;document.querySelectorAll(".evidence")[i].classList.add("opened");updateBar();}
-function pick(type,i,el){if(answers[type])return;answers[type]=true;let correct=type==="control"?company.controlCorrect:company.testCorrect;let opts=[...el.parentElement.children];opts.forEach((o,j)=>{if(j===correct)o.classList.add("correct");else if(j===i)o.classList.add("wrong")});let f=document.getElementById(type==="control"?"controlFeedback":"testFeedback");f.className="note "+(i===correct?"good":"bad");if(i===correct){score+=4;f.textContent="✅ Correcto. Esta decisión está sustentada por el caso."}else f.textContent="❌ Revisa las evidencias. No basta con elegir la opción que parece más relacionada: piensa qué control se está comprobando.";updateScore();updateBar();}
-function pickVerdict(v,el){if(answers.verdict)return;answers.verdict=true;let correct=company.verdict;let ok=v===correct;el.classList.add(ok?"correct":"wrong");if(!ok)[...document.querySelectorAll("#verdictOptions .option")].forEach((o,j)=>{if(j===2)o.classList.add("correct")});let f=document.getElementById("verdictFeedback");f.className="note "+(ok?"good":"bad");if(ok){score+=4;f.textContent="✅ Dictamen correcto según las evidencias del caso."}else f.textContent="❌ Vuelve a revisar las evidencias antes de cerrar el dictamen.";updateScore();updateBar();}
-function updateScore(){document.getElementById("headerScore").textContent=`${score} / 20 pts`;document.getElementById("livePoints").textContent=`${score} / 20`;}
+function openEvidence(i){
+if(!company) return;
+if(!document.querySelectorAll(".evidence")[i].classList.contains("opened")) opened++;
+let e=company.evidence[i];
+let d=document.getElementById("detail");
+d.className="note";d.innerHTML=`<b>${e[0]} ${e[1]}</b><br><br>${e[2]}`;
+document.querySelectorAll(".evidence")[i].classList.add("opened");
+saveCurrentState(); updateBar();
+}
+function pick(type,i,el){
+if(answers[type])return;
+answers[type]=true;
+if(type==="control") answers.controlIndex=i;
+if(type==="test") answers.testIndex=i;
+el.classList.add("selected");
+const f=document.getElementById(type==="control"?"controlFeedback":"testFeedback");
+f.className="note hidden";
+if(i===(type==="control"?company.controlCorrect:company.testCorrect)) score+=4;
+saveCurrentState(); updateScore(); updateBar();
+}
+function pickVerdict(v,el){
+if(answers.verdict)return;
+answers.verdict=true; answers.verdictValue=v;
+el.classList.add("selected");
+if(v===company.verdict) score+=4;
+document.getElementById("verdictFeedback").className="note hidden";
+saveCurrentState(); updateScore(); updateBar();
+}
+function updateScore(){document.getElementById("headerScore").textContent=`PROGRESO`;document.getElementById("livePoints").textContent=`EN ANÁLISIS`;}
 function updateBar(){let pct=Math.min(100,(opened/3)*20+(answers.control?20:0)+(answers.test?20:0)+(answers.verdict?20:0));document.getElementById("bar").style.width=pct+"%";}
 async function submitMission(){
 let vals=["condition","criterion","cause","effect","recommendation"].map(x=>document.getElementById(x).value.trim());
@@ -318,54 +364,83 @@ if(vals.some(v=>v.length<15)){
 let m=document.getElementById("submitMsg");m.className="note bad";m.textContent="Completa las cinco partes del papel de trabajo con suficiente detalle.";return}
 
 score+=4;
-updateScore();
-
 const payload={
-timestamp:new Date().toISOString(),
-grupo:group,
-integrantes:name,
-empresa:company.title,
-categoria:company.tag,
-puntos:score,
-control_correcto:answers.control,
-prueba_correcta:answers.test,
-dictamen_correcto:answers.verdict,
-evidencias_revisadas:opened,
-condicion:vals[0],
-criterio:vals[1],
-causa:vals[2],
-efecto:vals[3],
-recomendacion:vals[4],
+timestamp:new Date().toISOString(),grupo:group,integrantes:name,empresa:company.title,categoria:company.tag,puntos:score,
+control_correcto:answers.controlIndex===company.controlCorrect,test_correcta:answers.testIndex===company.testCorrect,
+dictamen_correcto:answers.verdictValue===company.verdict,evidencias_revisadas:opened,
+condicion:vals[0],criterio:vals[1],causa:vals[2],efecto:vals[3],recomendacion:vals[4],
 dictamen:company.verdict==="no"?"NO CUMPLE":"CUMPLE"
 };
 
 const msg=document.getElementById("submitMsg");
-if(GOOGLE_SCRIPT_URL==="PEGAR_AQUI_URL_DE_APPS_SCRIPT"){
-msg.className="note warn";
-msg.textContent="⚠️ El laboratorio está completo, pero todavía no se configuró la conexión con Google Sheets. Guarda esta versión y configura la URL del Apps Script.";
-}else{
-msg.className="note warn";
-msg.textContent="📤 Guardando la auditoría en Google Sheets...";
+msg.className="note warn";msg.textContent="📤 Registrando auditoría...";
 try{
-await fetch(GOOGLE_SCRIPT_URL,{
-method:"POST",
-mode:"no-cors",
-headers:{"Content-Type":"text/plain;charset=utf-8"},
-body:JSON.stringify(payload)
-});
-msg.className="note good";
-msg.textContent="✅ Auditoría enviada. El docente recibirá la entrega en Google Sheets.";
-}catch(err){
-msg.className="note bad";
-msg.textContent="❌ No se pudo enviar automáticamente. Copia el papel de trabajo y entrégalo por el canal indicado por el docente.";
+if(GOOGLE_SCRIPT_URL!=="PEGAR_AQUI_URL_DE_APPS_SCRIPT"){
+await fetch(GOOGLE_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
 }
-}
+submitted=true;
+const saved={started:true,submitted:true,group,name,companyIndex,opened,answers,score,vals,payload};
+localStorage.setItem("auditLab_"+group,JSON.stringify(saved));
 
 document.getElementById("finalIntro").textContent=`${group} · ${name} · ${company.title}`;
 document.getElementById("finalScore").textContent=`${score}/20`;
-document.getElementById("finalBreakdown").innerHTML=`4 pts análisis del control · 4 pts prueba · 4 pts dictamen · 4 pts papel de trabajo + 4 pts análisis de evidencias.<br><br><b>Registro:</b> ${GOOGLE_SCRIPT_URL==="PEGAR_AQUI_URL_DE_APPS_SCRIPT"?"pendiente de conexión":"enviado al sistema"}.`;
-document.getElementById("finalVerdict").textContent=company.verdict==="no"?"🔴 CONTROL NO CUMPLE":"🟢 CONTROL CUMPLE";
-document.getElementById("finalSummary").textContent=`El grupo debe conservar su análisis. La evidencia y la justificación son más importantes que acertar por intuición.`;
+document.getElementById("finalBreakdown").innerHTML=`Resultado obtenido al finalizar la auditoría. El puntaje se revela únicamente ahora.`;
+document.getElementById("finalVerdict").textContent=company.verdict==="no"?"🔴 CONTROL NO CUMPLE":company.verdict==="partial"?"🟡 CUMPLE PARCIALMENTE":"🟢 CONTROL CUMPLE";
+document.getElementById("finalSummary").textContent="Ahora puedes comparar tus decisiones con las respuestas sustentadas por las evidencias del caso.";
+document.getElementById("finalReview").innerHTML=buildFinalReview(vals);
+msg.className="note good";msg.textContent="✅ Auditoría registrada correctamente.";
+show("final");
+}catch(err){
+msg.className="note bad";msg.textContent="❌ No se pudo registrar la auditoría. No cierres la página y avisa al docente.";
+}
+}
+
+function buildFinalReview(vals){
+const c=company.controlCorrect, t=company.testCorrect, v=company.verdict;
+const chosenC=answers.controlIndex, chosenT=answers.testIndex, chosenV=answers.verdictValue;
+const controlText=company.controls[chosenC]||"Sin respuesta";
+const correctControl=company.controls[c];
+const testText=company.tests[chosenT]||"Sin respuesta";
+const correctTest=company.tests[t];
+const verdictText={yes:"🟢 El control cumple",partial:"🟡 Cumple parcialmente",no:"🔴 El control no cumple"};
+return `<div class="answer-review">
+<div class="answer-item"><strong>1. Control</strong><span class="chosen">Tu respuesta: ${controlText}</span><br><span class="right">Respuesta sustentada: ${correctControl}</span></div>
+<div class="answer-item"><strong>2. Prueba</strong><span class="chosen">Tu respuesta: ${testText}</span><br><span class="right">Prueba sustentada: ${correctTest}</span></div>
+<div class="answer-item"><strong>3. Dictamen</strong><span class="chosen">Tu respuesta: ${verdictText[chosenV]||"Sin respuesta"}</span><br><span class="right">Dictamen sustentado: ${verdictText[v]}</span></div>
+<div class="answer-item"><strong>4. Evidencias revisadas</strong>${opened} de ${company.evidence.length}</div>
+<div class="answer-item"><strong>5. Papel de trabajo</strong><p><b>Condición:</b> ${vals[0]}</p><p><b>Criterio:</b> ${vals[1]}</p><p><b>Causa:</b> ${vals[2]}</p><p><b>Efecto:</b> ${vals[3]}</p><p><b>Recomendación:</b> ${vals[4]}</p></div>
+</div>`;
+}
+
+function saveCurrentState(){
+const group=document.getElementById("groupName")?.value;
+if(!group||!company)return;
+const vals=["condition","criterion","cause","effect","recommendation"].map(x=>document.getElementById(x)?.value||"");
+localStorage.setItem("auditLab_"+group,JSON.stringify({started:true,submitted:false,group,name,companyIndex,opened,answers,score,vals}));
+}
+function saveState(x){localStorage.setItem("auditLab_"+x.group,JSON.stringify(x));}
+function restoreActive(saved){
+name=saved.name; companyIndex=saved.companyIndex; company=companies[companyIndex]; opened=saved.opened||0; answers=saved.answers||answers; score=saved.score||0;
+document.getElementById("studentName").value=name; document.getElementById("groupName").value=saved.group;
+renderMission(); show("mission");
+(saved.vals||[]).forEach((v,i)=>{const id=["condition","criterion","cause","effect","recommendation"][i];if(document.getElementById(id))document.getElementById(id).value=v;});
+if(company) [...document.querySelectorAll(".evidence")].forEach((el,i)=>{if(i<opened)el.classList.add("opened");});
+restoreSelections(); updateScore(); updateBar();
+}
+function restoreSelections(){
+if(answers.controlIndex!==null&&answers.controlIndex!==undefined) document.querySelectorAll("#controlOptions .option")[answers.controlIndex]?.classList.add("selected");
+if(answers.testIndex!==null&&answers.testIndex!==undefined) document.querySelectorAll("#testOptions .option")[answers.testIndex]?.classList.add("selected");
+if(answers.verdictValue){const map={yes:0,partial:1,no:2};document.querySelectorAll("#verdictOptions .option")[map[answers.verdictValue]]?.classList.add("selected");}
+}
+function restoreSubmitted(saved){
+name=saved.name;companyIndex=saved.companyIndex;company=companies[companyIndex];opened=saved.opened||0;answers=saved.answers||answers;score=saved.score||0;
+document.getElementById("studentName").value=name;document.getElementById("groupName").value=saved.group;
+document.getElementById("finalIntro").textContent=`${saved.group} · ${name} · ${company.title}`;
+document.getElementById("finalScore").textContent=`${score}/20`;
+document.getElementById("finalBreakdown").textContent="Esta auditoría ya fue enviada. El resultado se conserva aunque se recargue la página.";
+document.getElementById("finalVerdict").textContent=company.verdict==="no"?"🔴 CONTROL NO CUMPLE":company.verdict==="partial"?"🟡 CUMPLE PARCIALMENTE":"🟢 CONTROL CUMPLE";
+document.getElementById("finalSummary").textContent="Las respuestas y la retroalimentación ya fueron reveladas al finalizar.";
+document.getElementById("finalReview").innerHTML=buildFinalReview(saved.vals||["","","","",""]);
 show("final");
 }
 
@@ -439,6 +514,11 @@ const d=reviewData[key];
 document.getElementById('reviewPanel').innerHTML=
 `<h3>${d.title}</h3><p>${d.text}</p><div class="example"><b>💡 Ejemplo claro:</b> ${d.example}</div>`;
 }
+
+window.addEventListener("load",()=>{
+const group=document.getElementById("groupName")?.value;
+});
+window.addEventListener("beforeunload",()=>{ if(company && !submitted) saveCurrentState(); });
 </script>
 </body>
 </html>
