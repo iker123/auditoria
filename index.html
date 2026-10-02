@@ -51,6 +51,118 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 .section-title-uda:before{content:"";width:7px;height:28px;background:var(--red);display:inline-block;border-radius:2px}
 @media(max-width:800px){.review-grid{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}}
 .answer-review{display:grid;gap:10px;margin-top:12px}.answer-item{padding:12px;border:1px solid #29415f;border-radius:10px;background:#0a1726}.answer-item strong{display:block;margin-bottom:5px}.answer-item .right{color:#71e3a0}.answer-item .chosen{color:#ffd166}.lock-card{border:1px solid #2f6f50;background:#0b1d18}.option.selected{border-color:var(--yellow);background:#26351c;box-shadow:0 0 0 1px rgba(255,209,102,.25)}
+
+
+/* ===== ESTILO INSTITUCIONAL TIPO UDABOL ===== */
+body{
+  background:#ffffff !important;
+  color:#173f34 !important;
+  font-family:Arial,Segoe UI,sans-serif !important;
+}
+header{
+  background:#ffffff !important;
+  border-bottom:1px solid #d9e1dd !important;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+.nav{max-width:1150px}
+.brand{color:#075c43 !important}
+.brand span{color:#d9272e !important}
+.topscore{color:#075c43 !important}
+main{background:#fff}
+.card,.concept,.review-card,.question{
+  background:#fff !important;
+  color:#173f34 !important;
+  border:1px solid #d6dfda !important;
+  box-shadow:0 2px 8px rgba(0,0,0,.05) !important;
+}
+.hero{
+  background:#075c43 !important;
+  border-color:#075c43 !important;
+  color:#fff !important;
+}
+.hero h1,.hero h2,.hero p,.hero .lead{color:#fff !important}
+.eyebrow{color:#075c43 !important}
+h1,h2,h3{color:#075c43 !important}
+.lead,p{color:#4d625a}
+.section-title-uda{
+  color:#075c43 !important;
+  border-bottom:0 !important;
+}
+.section-title-uda:before{background:#d9272e !important}
+.review-card{
+  background:#f8fbf9 !important;
+  border-color:#cbd9d2 !important;
+}
+.review-card:hover{
+  border-color:#075c43 !important;
+  box-shadow:0 5px 18px rgba(7,92,67,.13) !important;
+}
+.review-card .num{background:#075c43 !important;color:#fff !important}
+.review-card h3{color:#075c43 !important}
+.review-card p{color:#5d6c66 !important}
+.review-card.active{border-color:#d9272e !important}
+.review-panel{
+  background:#f5faf7 !important;
+  color:#173f34 !important;
+  border-left-color:#d9272e !important;
+}
+.review-panel h3{color:#075c43 !important}
+.example{
+  background:#fff !important;
+  border-color:#c9d9d1 !important;
+  color:#36534a !important;
+}
+.review-step{
+  background:#075c43 !important;
+  color:#fff !important;
+  border-color:#075c43 !important;
+}
+.review-step:hover{background:#0a6d50 !important}
+input,textarea,select{
+  background:#fff !important;
+  color:#173f34 !important;
+  border:1px solid #bdcbc4 !important;
+}
+input:focus,textarea:focus,select:focus{
+  border-color:#075c43 !important;
+  box-shadow:0 0 0 3px rgba(7,92,67,.10) !important;
+}
+button{
+  background:#075c43 !important;
+  border-color:#075c43 !important;
+}
+button:hover{background:#0a6d50 !important}
+.note{background:#f5f8f6 !important;color:#36534a !important;border-color:#cbd9d2 !important}
+.note.warn{background:#fff9e8 !important;border-color:#e7c75f !important;color:#604d12 !important}
+.note.bad{background:#fff0f0 !important;border-color:#e0a5a5 !important;color:#8c2020 !important}
+.note.good{background:#eef9f1 !important;border-color:#a9d2b4 !important;color:#21633b !important}
+.paper-help{
+  background:#f7f9f8;
+  border-left:4px solid #d9272e;
+  padding:10px 12px;
+  color:#52645d !important;
+}
+.paper-work label{position:relative}
+.field-hint{
+  display:block;
+  font-size:12px;
+  color:#6b7b74;
+  margin:4px 0 6px;
+}
+.char-counter{
+  display:block;
+  text-align:right;
+  font-size:11px;
+  color:#7b8983;
+  margin-top:3px;
+}
+.char-counter.ok{color:#178548;font-weight:700}
+.char-counter.low{color:#b26a00}
+footer{
+  background:#075c43 !important;
+  color:#fff !important;
+  border-top:4px solid #d9272e !important;
+}
 </style>
 </head>
 <body>
@@ -109,7 +221,6 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <span class="num">06</span><h3>🔧 Correctivo</h3><p>Actúa para corregir o contener un problema detectado.</p>
 </button>
 </div>
-<div class="note" style="margin-top:15px"><b>Ahora damos el siguiente paso:</b> ¿cómo comprueba un auditor que un control realmente funciona?</div>
 <div class="section-title-uda" style="margin-top:20px"><h2 style="margin:0;font-size:21px">Del concepto al trabajo del auditor</h2></div>
 <div class="review-steps">
 <button type="button" class="review-step" onclick="showReview('riesgo',this)">1 · Riesgo</button>
@@ -198,16 +309,17 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <div id="verdictFeedback" class="note hidden" style="margin-top:12px"></div>
 </div>
 
-<div class="card question">
+<div class="card question paper-work">
 <div class="eyebrow">FASE 06 · PAPEL DE TRABAJO</div>
 <h2 style="margin:7px 0">Documenta el hallazgo</h2>
+<p class="paper-help">Redacta cada elemento con base en las evidencias revisadas. <b>Mínimo 30 caracteres por campo.</b></p>
 <div class="two">
-<label><b>Condición</b><textarea id="condition" placeholder="¿Qué encontraste?"></textarea></label>
-<label><b>Criterio</b><textarea id="criterion" placeholder="¿Qué debería ocurrir?"></textarea></label>
-<label><b>Causa o posible causa</b><textarea id="cause" placeholder="¿Por qué podría estar ocurriendo? Si no hay evidencia suficiente, indícalo."></textarea></label>
-<label><b>Efecto / riesgo</b><textarea id="effect" placeholder="¿Qué consecuencia puede producir?"></textarea></label>
+<label><b>Condición</b><span class="field-hint">Qué encontraste · mínimo 30 caracteres</span><textarea id="condition" minlength="30" placeholder="Describe el hecho o situación encontrada con evidencia."></textarea><small class="char-counter" id="conditionCount">0/30</small></label>
+<label><b>Criterio</b><span class="field-hint">Qué debería ocurrir · mínimo 30 caracteres</span><textarea id="criterion" minlength="30" placeholder="Indica la norma, política, procedimiento o condición esperada."></textarea><small class="char-counter" id="criterionCount">0/30</small></label>
+<label><b>Causa o posible causa</b><span class="field-hint">Por qué podría ocurrir · mínimo 30 caracteres</span><textarea id="cause" minlength="30" placeholder="Explica la causa solo si existe evidencia suficiente; de lo contrario, indícalo."></textarea><small class="char-counter" id="causeCount">0/30</small></label>
+<label><b>Efecto / riesgo</b><span class="field-hint">Qué consecuencia puede producir · mínimo 30 caracteres</span><textarea id="effect" minlength="30" placeholder="Explica la consecuencia o riesgo que podría producirse."></textarea><small class="char-counter" id="effectCount">0/30</small></label>
 </div>
-<label style="display:block;margin-top:12px"><b>Recomendación</b><textarea id="recommendation" placeholder="¿Qué mejora propones?"></textarea></label>
+<label style="display:block;margin-top:12px"><b>Recomendación</b><span class="field-hint">Qué mejora propones · mínimo 30 caracteres</span><textarea id="recommendation" minlength="30" placeholder="Propón una mejora concreta y relacionada con el hallazgo."></textarea><small class="char-counter" id="recommendationCount">0/30</small></label>
 <div class="note warn" style="margin-top:13px">⚠️ No inventes información. Si una causa no está demostrada por las evidencias, puedes escribir: <b>“No se cuenta con evidencia suficiente para determinar la causa.”</b></div>
 <div style="margin-top:15px"><button onclick="submitMission()">FINALIZAR Y GENERAR DICTAMEN</button></div>
 <div id="submitMsg" class="note hidden" style="margin-top:12px"></div>
@@ -323,7 +435,7 @@ document.getElementById("testPrompt").textContent=company.testPrompt;
 document.getElementById("testOptions").innerHTML=company.tests.map((x,i)=>`<div class="option" onclick="pick('test',${i},this)">${String.fromCharCode(65+i)}. ${x}</div>`).join("");
 document.getElementById("verdictOptions").innerHTML=[["yes","🟢 El control cumple"],["partial","🟡 Cumple parcialmente"],["no","🔴 El control no cumple"]].map(x=>`<div class="option" onclick="pickVerdict('${x[0]}',this)">${x[1]}</div>`).join("");
 ["condition","criterion","cause","effect","recommendation"].forEach(x=>document.getElementById(x).value="");
-document.getElementById("controlFeedback").className="note hidden";document.getElementById("testFeedback").className="note hidden";document.getElementById("verdictFeedback").className="note hidden";document.getElementById("submitMsg").className="note hidden";
+document.getElementById("controlFeedback").className="note hidden";document.getElementById("testFeedback").className="note hidden";document.getElementById("verdictFeedback").className="note hidden";document.getElementById("submitMsg").className="note hidden";setupCharacterCounters();
 }
 function openEvidence(i){
 if(!company) return;
@@ -360,8 +472,8 @@ let vals=["condition","criterion","cause","effect","recommendation"].map(x=>docu
 let group=document.getElementById("groupName").value;
 if(opened<3||!answers.control||!answers.test||!answers.verdict){
 let m=document.getElementById("submitMsg");m.className="note bad";m.textContent="Antes de finalizar: revisa al menos 3 evidencias y completa las tres decisiones de análisis.";return}
-if(vals.some(v=>v.length<15)){
-let m=document.getElementById("submitMsg");m.className="note bad";m.textContent="Completa las cinco partes del papel de trabajo con suficiente detalle.";return}
+if(vals.some(v=>v.length<30)){
+let m=document.getElementById("submitMsg");m.className="note bad";m.textContent="Cada parte del papel de trabajo debe tener al menos 30 caracteres. Explica tus respuestas con base en las evidencias.";return}
 
 score+=4;
 const payload={
@@ -412,6 +524,20 @@ return `<div class="answer-review">
 </div>`;
 }
 
+function setupCharacterCounters(){
+const ids=["condition","criterion","cause","effect","recommendation"];
+ids.forEach(id=>{
+  const el=document.getElementById(id), counter=document.getElementById(id+"Count");
+  if(!el||!counter)return;
+  const update=()=>{
+    const n=el.value.trim().length;
+    counter.textContent=n+"/30";
+    counter.className="char-counter "+(n>=30?"ok":"low");
+  };
+  el.addEventListener("input",update);
+  update();
+});
+}
 function saveCurrentState(){
 const group=document.getElementById("groupName")?.value;
 if(!group||!company)return;
