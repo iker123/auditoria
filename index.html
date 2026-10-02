@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AUDIT LAB · UDABOL — Misión de Auditoría</title>
 <style>
-:root{--bg:#07101c;--panel:#0e1a2b;--panel2:#12233a;--line:#29415f;--text:#edf6ff;--muted:#9db0c7;--cyan:#42d8ff;--green:#3dde8a;--yellow:#ffd166;--red:#ff647c;--purple:#a98cff}
+:root{--bg:#07101c;--panel:#0e1a2b;--panel2:#12233a;--line:#29415f;--text:#edf6ff;--muted:#9db0c7;--cyan:#42d8ff;--green:#35b86b;--udagreen:#178548;--yellow:#ffd166;--red:#d9272e;--purple:#a98cff}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#183856 0,#07101c 38%,#040912 100%);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
 header{position:sticky;top:0;z-index:10;background:rgba(4,9,18,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .nav{max-width:1150px;margin:auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{font-weight:900;letter-spacing:.08em}.brand span{color:var(--cyan)}.topscore{font-weight:800;color:var(--cyan)}
@@ -36,6 +36,20 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 .review-panel h3{margin:0 0 6px;color:var(--cyan)}
 .review-panel .example{margin-top:10px;padding:11px;border-left:3px solid var(--green);background:#0a1c1a;border-radius:6px}
 @media(max-width:800px){.review-steps{grid-template-columns:repeat(2,1fr)}}
+
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.review-card{width:100%;text-align:left;background:linear-gradient(145deg,#102b25,#0a1918);color:var(--text);border:1px solid #2f6f50;border-radius:14px;padding:16px;cursor:pointer;transition:.2s;position:relative}
+.review-card:hover{transform:translateY(-2px);border-color:var(--green);box-shadow:0 8px 25px rgba(23,133,72,.18)}
+.review-card.active{border-color:var(--red);box-shadow:0 0 0 1px rgba(217,39,46,.35)}
+.review-card .num{display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:50%;background:var(--udagreen);font-weight:900;margin-bottom:8px}
+.review-card h3{margin:3px 0 5px;font-size:16px}
+.review-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+.review-panel{margin-top:14px;border-left:4px solid var(--red);background:linear-gradient(145deg,#122b22,#091713);border-radius:12px;padding:18px;min-height:100px}
+.review-panel h3{margin:0 0 7px}
+.example{margin-top:12px;padding:12px;border-radius:10px;background:#071321;border:1px solid #315b47;color:#cfe9dc;line-height:1.5}
+.section-title-uda{display:flex;align-items:center;gap:10px}
+.section-title-uda:before{content:"";width:7px;height:28px;background:var(--red);display:inline-block;border-radius:2px}
+@media(max-width:800px){.review-grid{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -62,20 +76,40 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 </div>
 <div class="card">
 <div class="eyebrow">ANTES DE EMPEZAR · RECORDATORIO</div>
-<div class="concepts" style="grid-template-columns:1fr">
-<div class="concept"><h3>🛡️ Preventivo</h3><p>Busca evitar que ocurra el error antes de que suceda.</p></div>
-<div class="concept"><h3>👁️ Detectivo</h3><p>Busca descubrir una situación o error después de ocurrido.</p></div>
-<div class="concept"><h3>🔧 Correctivo</h3><p>Actúa para corregir o contener un problema ya detectado.</p></div>
+<div class="concepts" style="grid-template-columns:repeat(3,1fr)">
+<button type="button" class="concept review-card" onclick="showReview('preventivo',this)"><h3>🛡️ Preventivo</h3><p>Evita o reduce la posibilidad de que ocurra el problema.</p></button>
+<button type="button" class="concept review-card" onclick="showReview('detectivo',this)"><h3>👁️ Detectivo</h3><p>Ayuda a descubrir una situación o error.</p></button>
+<button type="button" class="concept review-card" onclick="showReview('correctivo',this)"><h3>🔧 Correctivo</h3><p>Actúa para corregir o contener un problema.</p></button>
 </div>
 </div>
 </div>
 
 <div class="card" style="margin-top:18px">
 <div class="eyebrow">LO QUE YA APRENDISTE</div>
-<div class="steps">
-<div class="step"><b>01</b>Entrada</div><div class="step"><b>02</b>Procesamiento</div><div class="step"><b>03</b>Salida</div><div class="step"><b>04</b>Preventivo</div><div class="step"><b>05</b>Detectivo</div><div class="step"><b>06</b>Correctivo</div>
+<div class="section-title-uda"><h2 style="margin:0">Repaso de conceptos</h2></div>
+<p class="lead" style="font-size:14px;margin:8px 0 0">Haz clic en cada concepto para recordar qué significa y ver un ejemplo aplicado a auditoría de sistemas.</p>
+<div class="review-grid">
+<button type="button" class="review-card" onclick="showReview('entrada',this)">
+<span class="num">01</span><h3>📥 Entrada</h3><p>Información que ingresa al sistema o proceso.</p>
+</button>
+<button type="button" class="review-card" onclick="showReview('procesamiento',this)">
+<span class="num">02</span><h3>⚙️ Procesamiento</h3><p>Transformación, validación o tratamiento de la información.</p>
+</button>
+<button type="button" class="review-card" onclick="showReview('salida',this)">
+<span class="num">03</span><h3>📤 Salida</h3><p>Información o resultado que genera el sistema.</p>
+</button>
+<button type="button" class="review-card" onclick="showReview('preventivo',this)">
+<span class="num">04</span><h3>🛡️ Preventivo</h3><p>Busca evitar que ocurra un error o evento no deseado.</p>
+</button>
+<button type="button" class="review-card" onclick="showReview('detectivo',this)">
+<span class="num">05</span><h3>👁️ Detectivo</h3><p>Busca descubrir un error o situación después de ocurrida.</p>
+</button>
+<button type="button" class="review-card" onclick="showReview('correctivo',this)">
+<span class="num">06</span><h3>🔧 Correctivo</h3><p>Actúa para corregir o contener un problema detectado.</p>
+</button>
 </div>
 <div class="note" style="margin-top:15px"><b>Ahora damos el siguiente paso:</b> ¿cómo comprueba un auditor que un control realmente funciona?</div>
+<div class="section-title-uda" style="margin-top:20px"><h2 style="margin:0;font-size:21px">Del concepto al trabajo del auditor</h2></div>
 <div class="review-steps">
 <button type="button" class="review-step" onclick="showReview('riesgo',this)">1 · Riesgo</button>
 <button type="button" class="review-step" onclick="showReview('control',this)">2 · Control</button>
@@ -336,6 +370,36 @@ show("final");
 }
 
 const reviewData={
+entrada:{
+title:"📥 ¿Qué es una ENTRADA?",
+text:"Es la información, dato, documento o evento que ingresa a un sistema o proceso para ser utilizado posteriormente. En auditoría se revisa si la entrada es válida, completa, autorizada y está correctamente registrada.",
+example:"En una farmacia, una receta médica puede ser una entrada para registrar la dispensación de un medicamento. El auditor puede comprobar si contiene los datos requeridos y si fue ingresada por un usuario autorizado."
+},
+procesamiento:{
+title:"⚙️ ¿Qué es el PROCESAMIENTO?",
+text:"Es el conjunto de operaciones que el sistema o proceso realiza sobre las entradas: valida, calcula, clasifica, transforma, compara o registra información. El auditor revisa si estas reglas se aplican correctamente.",
+example:"Si el sistema recibe una venta de medicamentos, puede comprobar el stock, calcular el importe y descontar la cantidad vendida. El auditor puede probar si el sistema realiza esas operaciones de acuerdo con las reglas establecidas."
+},
+salida:{
+title:"📤 ¿Qué es una SALIDA?",
+text:"Es la información, resultado o documento que produce un sistema después del procesamiento. Una salida puede ser una factura, reporte, alerta, comprobante o registro.",
+example:"Después de registrar una venta, el sistema genera una factura y actualiza el reporte de inventario. El auditor puede comprobar si ambos resultados coinciden con la operación realizada."
+},
+preventivo:{
+title:"🛡️ ¿Qué es un CONTROL PREVENTIVO?",
+text:"Es un control diseñado para actuar antes de que ocurra un error, fraude o situación no deseada. Su objetivo es reducir la posibilidad de que el evento ocurra.",
+example:"El sistema impide registrar una venta cuando el usuario no tiene permisos suficientes. El control intenta evitar la operación no autorizada antes de que se complete."
+},
+detectivo:{
+title:"👁️ ¿Qué es un CONTROL DETECTIVO?",
+text:"Es un control diseñado para identificar un error, irregularidad o evento después de que puede haber ocurrido. Su valor está en detectar oportunamente la situación.",
+example:"Un reporte diario identifica ventas realizadas con precios fuera del rango permitido. El control no evita necesariamente la venta, pero ayuda a descubrir operaciones que deben revisarse."
+},
+correctivo:{
+title:"🔧 ¿Qué es un CONTROL CORRECTIVO?",
+text:"Es un control que actúa después de detectar un problema para corregirlo, contenerlo o reducir sus efectos.",
+example:"Después de detectar un registro de inventario incorrecto, se corrige el saldo, se documenta el ajuste y se revisa la causa del error."
+},
 riesgo:{
 title:"🔴 ¿Qué es un RIESGO?",
 text:"Es una situación o evento que podría afectar la información, los procesos o los objetivos de una organización. En auditoría preguntamos qué podría salir mal y qué consecuencia tendría.",
