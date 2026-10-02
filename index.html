@@ -27,10 +27,19 @@ button{border:0;border-radius:10px;padding:12px 17px;background:var(--cyan);colo
 .final-score{font-size:64px;font-weight:900;color:var(--cyan)}.final-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:15px}
 footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 @media(max-width:800px){.hero,.two,.final-grid{grid-template-columns:1fr}.company-grid{grid-template-columns:1fr}.concepts{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.evidence-grid{grid-template-columns:1fr 1fr}.nav{padding:12px 14px}}
+
+.review-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px}
+.review-step{padding:12px 8px;text-align:center;border:1px solid var(--line);border-radius:11px;background:#091727;color:var(--text);font-weight:800;cursor:pointer;transition:.15s}
+.review-step:hover{border-color:var(--cyan);transform:translateY(-1px)}
+.review-step.active{border-color:var(--cyan);background:#102b43;box-shadow:0 0 0 1px rgba(66,216,255,.2)}
+.review-panel{margin-top:12px;padding:16px;border:1px solid var(--cyan);border-radius:12px;background:#071321;line-height:1.6}
+.review-panel h3{margin:0 0 6px;color:var(--cyan)}
+.review-panel .example{margin-top:10px;padding:11px;border-left:3px solid var(--green);background:#0a1c1a;border-radius:6px}
+@media(max-width:800px){.review-steps{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-<header><div class="nav"><div class="brand">🛡️ AUDIT <span>LAB</span> · UDABOL</div><div class="topscore" id="headerScore">0 / 20 pts</div></div></header>
+<header><div class="nav"><div class="brand">🛡️ AUDIT <span>LAB</span> · UDABOL <small style="display:block;color:var(--muted);font-size:10px;letter-spacing:0">Docente: Ing. Iver Guerrero Ortiz</small></div><div class="topscore" id="headerScore">0 / 20 pts</div></div></header>
 <main>
 
 <section id="intro">
@@ -67,8 +76,17 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <div class="step"><b>01</b>Entrada</div><div class="step"><b>02</b>Procesamiento</div><div class="step"><b>03</b>Salida</div><div class="step"><b>04</b>Preventivo</div><div class="step"><b>05</b>Detectivo</div><div class="step"><b>06</b>Correctivo</div>
 </div>
 <div class="note" style="margin-top:15px"><b>Ahora damos el siguiente paso:</b> ¿cómo comprueba un auditor que un control realmente funciona?</div>
-<div class="steps" style="grid-template-columns:repeat(6,1fr)">
-<div class="step"><b>1</b>Riesgo</div><div class="step"><b>2</b>Control</div><div class="step"><b>3</b>Evidencia</div><div class="step"><b>4</b>Prueba</div><div class="step"><b>5</b>Resultado</div><div class="step"><b>6</b>Hallazgo</div>
+<div class="review-steps">
+<button type="button" class="review-step" onclick="showReview('riesgo',this)">1 · Riesgo</button>
+<button type="button" class="review-step" onclick="showReview('control',this)">2 · Control</button>
+<button type="button" class="review-step" onclick="showReview('evidencia',this)">3 · Evidencia</button>
+<button type="button" class="review-step" onclick="showReview('prueba',this)">4 · Prueba</button>
+<button type="button" class="review-step" onclick="showReview('resultado',this)">5 · Resultado</button>
+<button type="button" class="review-step" onclick="showReview('hallazgo',this)">6 · Hallazgo</button>
+</div>
+<div id="reviewPanel" class="review-panel">
+<h3>📚 Repaso rápido</h3>
+<p>Haz clic en cualquiera de los seis conceptos para leer una explicación y un ejemplo antes de comenzar la misión.</p>
 </div>
 <ul class="rules">
 <li>🔎 <b>No todo dato es evidencia útil.</b> Debes analizar qué demuestra realmente cada documento.</li>
@@ -175,7 +193,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 </div>
 </section>
 </main>
-<footer>AUDIT LAB · UDABOL · Actividad práctica — 20 puntos</footer>
+<footer>AUDIT LAB · UDABOL · Actividad práctica — 20 puntos<br><b>Docente: Ing. Iver Guerrero Ortiz</b></footer>
 
 <script>
 /* ===== CONFIGURACIÓN =====
@@ -256,7 +274,7 @@ function openEvidence(i){opened++;let e=company.evidence[i];let d=document.getEl
 function pick(type,i,el){if(answers[type])return;answers[type]=true;let correct=type==="control"?company.controlCorrect:company.testCorrect;let opts=[...el.parentElement.children];opts.forEach((o,j)=>{if(j===correct)o.classList.add("correct");else if(j===i)o.classList.add("wrong")});let f=document.getElementById(type==="control"?"controlFeedback":"testFeedback");f.className="note "+(i===correct?"good":"bad");if(i===correct){score+=4;f.textContent="✅ Correcto. Esta decisión está sustentada por el caso."}else f.textContent="❌ Revisa las evidencias. No basta con elegir la opción que parece más relacionada: piensa qué control se está comprobando.";updateScore();updateBar();}
 function pickVerdict(v,el){if(answers.verdict)return;answers.verdict=true;let correct=company.verdict;let ok=v===correct;el.classList.add(ok?"correct":"wrong");if(!ok)[...document.querySelectorAll("#verdictOptions .option")].forEach((o,j)=>{if(j===2)o.classList.add("correct")});let f=document.getElementById("verdictFeedback");f.className="note "+(ok?"good":"bad");if(ok){score+=4;f.textContent="✅ Dictamen correcto según las evidencias del caso."}else f.textContent="❌ Vuelve a revisar las evidencias antes de cerrar el dictamen.";updateScore();updateBar();}
 function updateScore(){document.getElementById("headerScore").textContent=`${score} / 20 pts`;document.getElementById("livePoints").textContent=`${score} / 20`;}
-function updateBar(){let pct=Math.min(100,(opened/3)*20+(answers.control?20:0)+(answers.test?20:0)+(answers.verdict?20:0);document.getElementById("bar").style.width=pct+"%";}
+function updateBar(){let pct=Math.min(100,(opened/3)*20+(answers.control?20:0)+(answers.test?20:0)+(answers.verdict?20:0));document.getElementById("bar").style.width=pct+"%";}
 async function submitMission(){
 let vals=["condition","criterion","cause","effect","recommendation"].map(x=>document.getElementById(x).value.trim());
 let group=document.getElementById("groupName").value;
@@ -315,6 +333,47 @@ document.getElementById("finalBreakdown").innerHTML=`4 pts análisis del control
 document.getElementById("finalVerdict").textContent=company.verdict==="no"?"🔴 CONTROL NO CUMPLE":"🟢 CONTROL CUMPLE";
 document.getElementById("finalSummary").textContent=`El grupo debe conservar su análisis. La evidencia y la justificación son más importantes que acertar por intuición.`;
 show("final");
+}
+
+const reviewData={
+riesgo:{
+title:"🔴 ¿Qué es un RIESGO?",
+text:"Es una situación o evento que podría afectar la información, los procesos o los objetivos de una organización. En auditoría preguntamos qué podría salir mal y qué consecuencia tendría.",
+example:"Ejemplo: si cualquier empleado pudiera consultar historias clínicas sin autorización, existe el riesgo de acceso no autorizado y exposición de información confidencial."
+},
+control:{
+title:"🛡️ ¿Qué es un CONTROL?",
+text:"Es una medida, regla o mecanismo diseñado para prevenir, detectar o corregir un riesgo. Un control puede existir en una política, un procedimiento o dentro de un sistema.",
+example:"Ejemplo: el sistema exige usuario, contraseña y permisos antes de permitir consultar una historia clínica."
+},
+evidencia:{
+title:"📄 ¿Qué es una EVIDENCIA?",
+text:"Es la información que el auditor obtiene y utiliza para sustentar una conclusión. Debe ser relevante para la prueba que se está realizando; no todo documento o dato demuestra que un control funciona.",
+example:"Ejemplo: un registro de accesos puede mostrar quién consultó una historia clínica, cuándo la consultó y con qué usuario."
+},
+prueba:{
+title:"🧪 ¿Qué es una PRUEBA?",
+text:"Es el procedimiento que realiza el auditor para comprobar si un control existe y funciona como se espera. La prueba debe relacionarse directamente con el riesgo y el control.",
+example:"Ejemplo: intentar acceder con un usuario que no tiene permiso y verificar si el sistema bloquea el acceso y registra el intento."
+},
+resultado:{
+title:"📊 ¿Qué es un RESULTADO?",
+text:"Es lo que se obtiene después de aplicar la prueba y analizar la evidencia. Permite determinar si el control funcionó, no funcionó o si la evidencia disponible no permite concluir.",
+example:"Ejemplo: el usuario sin permiso fue bloqueado y el intento quedó registrado. El resultado indica que el control respondió como estaba diseñado."
+},
+hallazgo:{
+title:"⚠️ ¿Qué es un HALLAZGO?",
+text:"Es una situación identificada por el auditor que debe documentarse con evidencia y compararse con un criterio. Un hallazgo debe explicar qué se encontró, por qué importa y qué debería mejorarse.",
+example:"Ejemplo: se detectaron tres accesos fuera de horario realizados con cuentas que no tenían autorización documentada. Esto debe sustentarse con los registros y analizarse frente a la política de acceso."
+}
+};
+
+function showReview(key,btn){
+document.querySelectorAll('.review-step').forEach(b=>b.classList.remove('active'));
+if(btn) btn.classList.add('active');
+const d=reviewData[key];
+document.getElementById('reviewPanel').innerHTML=
+`<h3>${d.title}</h3><p>${d.text}</p><div class="example"><b>💡 Ejemplo claro:</b> ${d.example}</div>`;
 }
 </script>
 </body>
