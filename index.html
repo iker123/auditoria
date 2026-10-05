@@ -292,7 +292,24 @@ evidence:[
 ["🗓️","Calendario de publicación","Web: miércoles 09:00<br>Instagram: viernes 18:00<br>WhatsApp: lunes siguiente<br><b>Fecha única de salida: NO DEFINIDA</b>",true],
 ["📊","Visitas a la web","Visitas esta semana: 4.200",false],
 ["💬","Chat del equipo","Community Manager: Subí lo de Instagram hoy<br>Community Manager: Por WhatsApp mando lo que hay en la carpeta<br><b>No sabía que la web ya tenía otro descuento</b>",true],
-["📌","Tablero Kanban","Listo: 9<br>En proceso: 0<br>Por hacer: 0<br>Todas las tareas con responsable y fecha",true]]}
+["📌","Tablero Kanban","Listo: 9<br>En proceso: 0<br>Por hacer: 0<br>Todas las tareas con responsable y fecha",true]]},
+
+{title:"🏋️ Gimnasio Atlas",tag:"RETO 30 DÍAS · ALCANCE",meta:"Campaña «Reto de 30 días»",
+context:"El Gimnasio Atlas prepara el «Reto de 30 días» para atraer socios nuevos, con contenido en Instagram, TikTok y WhatsApp. El plan inicial era de 6 piezas, con un equipo de 4 personas y una semana de trabajo.",
+incident:"🚨 INCIDENTE: Llegó el día del lanzamiento y solo 7 de las 15 piezas estaban listas. El dueño dice que el equipo «no rindió».",
+controlPrompt:"Según las evidencias, ¿cuál es la falla principal?",
+controls:["Los roles del equipo no estaban asignados al inicio","El precio de la membresía era demasiado elevado","Había muy pocos socios para promocionar el reto","El trabajo creció sin ajustar fecha ni presupuesto"],controlCorrect:3,
+testPrompt:"¿Qué medida corrige mejor el problema?",
+tests:["Contratar más personal de edición para la semana","Fijar el alcance y analizar el impacto de cada cambio","Bajar la calidad de las piezas para ir más rápido","Publicar las piezas pendientes después del lanzamiento"],testCorrect:1,
+etapa:0,
+why:"Los roles estaban asignados y el cronograma no cambió, pero el dueño pasó de 6 a 15 piezas sin mover la fecha ni el presupuesto, y no existía un objetivo escrito ni un proceso para aceptar cambios. Eso se define al planificar: alcance, tiempo y costo.",
+evidence:[
+["💪","Socios actuales","Socios activos: 320<br>Bajas del último mes: 12",false],
+["📋","Pedidos del dueño","Lunes: 6 piezas<br>Martes: +4 piezas<br>Miércoles: +5 piezas<br><b>Fecha de entrega y presupuesto: sin cambios</b>",true],
+["👥","Lista de roles","Project Manager: asignado<br>Diseño: asignado<br>Edición: asignado<br>Community Manager: asignado<br><b>Responsable en cada tarea: SÍ</b>",true],
+["🏷️","Precios de membresía","Mensual: Bs 250<br>Trimestral: Bs 650",false],
+["🎯","Objetivo y alcance","Objetivo escrito: <b>NO DEFINIDO</b><br>Alcance acordado el lunes: 6 piezas<br>Proceso para aceptar cambios: <b>NO EXISTE</b>",true],
+["💬","Chat del equipo","Miércoles 23:20 Diseñador: ¿Entonces ya son 15? ¿Movemos la fecha?<br>Dueño: No, el viernes sale igual<br>Diseñador: Con el tiempo que tenemos no llegamos",true]]}
 ];
 
 let name="",company=null,companyIndex=null,openedList=[],answers=freshAnswers(),submitted=false;
