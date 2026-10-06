@@ -319,6 +319,7 @@ renderCompanies();show("choose");
 function renderCompanies(){document.getElementById("companies").innerHTML=companies.map((c,i)=>`<div class="card company" onclick="selectCompany(${i})"><span class="tag">${c.tag}</span><h3>${c.title}</h3><p>${c.meta}</p><p>${c.context}</p><button class="secondary">AUDITAR ESTA EMPRESA →</button></div>`).join("");}
 function selectCompany(i){
 companyIndex=i; company=companies[i]; score=0; opened=0;
+practicalTests={}; practicalEvidence=[];
 answers={control:false,test:false,verdict:false,controlIndex:null,testIndex:null,verdictValue:null};
 saveState({started:true,submitted:false,group:document.getElementById("groupName").value,name,companyIndex:i,opened,answers,score});
 renderMission();show("mission");
@@ -339,12 +340,12 @@ document.getElementById("detail").className="note hidden";
 practicalTests=practicalTests||{}; practicalEvidence=practicalEvidence||[]; renderPracticalLab();
 document.getElementById("controlPrompt").textContent=company.controlPrompt;
 document.getElementById("controlOptions").innerHTML=company.controls.map((x,i)=>`<div class="option" onclick="pick('control',${i},this)">${String.fromCharCode(65+i)}. ${x}</div>`).join("");
+// Las pruebas ahora se realizan en el laboratorio práctico.
 const testPromptEl=document.getElementById("testPrompt");
-if(testPromptEl) testPromptEl.textContent=company.testPrompt;
-document.getElementById("testOptions").innerHTML=company.tests.map((x,i)=>`<div class="option" onclick="pick('test',${i},this)">${String.fromCharCode(65+i)}. ${x}</div>`).join("");
+if(testPromptEl) testPromptEl.textContent="Ejecuta una prueba real en el módulo del sistema.";
 document.getElementById("verdictOptions").innerHTML=[["yes","🟢 El control cumple"],["partial","🟡 Cumple parcialmente"],["no","🔴 El control no cumple"]].map(x=>`<div class="option" onclick="pickVerdict('${x[0]}',this)">${x[1]}</div>`).join("");
 ["condition","criterion","cause","effect","recommendation"].forEach(x=>document.getElementById(x).value="");
-document.getElementById("controlFeedback").className="note hidden";document.getElementById("testFeedback").className="note hidden";document.getElementById("verdictFeedback").className="note hidden";document.getElementById("submitMsg").className="note hidden";setupCharacterCounters();
+["controlFeedback","testFeedback","verdictFeedback","submitMsg"].forEach(id=>{const el=document.getElementById(id);if(el)el.className="note hidden";});setupCharacterCounters();
 }
 function openEvidence(i){
 if(!company) return;
@@ -362,7 +363,7 @@ if(type==="control") answers.controlIndex=i;
 if(type==="test") answers.testIndex=i;
 el.classList.add("selected");
 const f=document.getElementById(type==="control"?"controlFeedback":"testFeedback");
-f.className="note hidden";
+if(f) f.className="note hidden";
 if(type==="control" && i===company.controlCorrect) score+=4;
 saveCurrentState(); updateScore(); updateBar();
 }
@@ -480,7 +481,7 @@ restoreSelections(); updateScore(); updateBar();
 }
 function restoreSelections(){
 if(answers.controlIndex!==null&&answers.controlIndex!==undefined) document.querySelectorAll("#controlOptions .option")[answers.controlIndex]?.classList.add("selected");
-if(answers.testIndex!==null&&answers.testIndex!==undefined) document.querySelectorAll("#testOptions .option")[answers.testIndex]?.classList.add("selected");
+// Las pruebas se realizan mediante el laboratorio práctico; no se restaura un selector antiguo.
 if(answers.verdictValue){const map={yes:0,partial:1,no:2};document.querySelectorAll("#verdictOptions .option")[map[answers.verdictValue]]?.classList.add("selected");}
 }
 function restoreSubmitted(saved){
