@@ -78,6 +78,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <option value="">Selecciona tu grupo</option>
 <option>Grupo 1</option><option>Grupo 2</option><option>Grupo 3</option>
 <option>Grupo 4</option><option>Grupo 5</option><option>Grupo 6</option>
+<option>Grupo 7</option><option>Grupo 8</option>
 </select></label>
 <label><b>Integrantes / nombre del auditor</b>
 <input id="studentName" placeholder="Nombres de los integrantes"></label>
@@ -323,8 +324,10 @@ saveState({started:true,submitted:false,group:document.getElementById("groupName
 renderMission();show("mission");
 }
 function renderMission(){
-document.getElementById("headerScore").textContent=`PROGRESO`;
-document.getElementById("livePoints").textContent=`EN ANÁLISIS`;
+const headerScore=document.getElementById("headerScore");
+const livePoints=document.getElementById("livePoints");
+if(headerScore) headerScore.textContent=`PROGRESO`;
+if(livePoints) livePoints.textContent=`EN ANÁLISIS`;
 document.getElementById("missionNo").textContent=`MISIÓN · ${company.tag}`;
 document.getElementById("missionTitle").textContent=company.title;
 document.getElementById("missionMeta").textContent=company.meta;
@@ -336,7 +339,8 @@ document.getElementById("detail").className="note hidden";
 practicalTests=practicalTests||{}; practicalEvidence=practicalEvidence||[]; renderPracticalLab();
 document.getElementById("controlPrompt").textContent=company.controlPrompt;
 document.getElementById("controlOptions").innerHTML=company.controls.map((x,i)=>`<div class="option" onclick="pick('control',${i},this)">${String.fromCharCode(65+i)}. ${x}</div>`).join("");
-document.getElementById("testPrompt").textContent=company.testPrompt;
+const testPromptEl=document.getElementById("testPrompt");
+if(testPromptEl) testPromptEl.textContent=company.testPrompt;
 document.getElementById("testOptions").innerHTML=company.tests.map((x,i)=>`<div class="option" onclick="pick('test',${i},this)">${String.fromCharCode(65+i)}. ${x}</div>`).join("");
 document.getElementById("verdictOptions").innerHTML=[["yes","🟢 El control cumple"],["partial","🟡 Cumple parcialmente"],["no","🔴 El control no cumple"]].map(x=>`<div class="option" onclick="pickVerdict('${x[0]}',this)">${x[1]}</div>`).join("");
 ["condition","criterion","cause","effect","recommendation"].forEach(x=>document.getElementById(x).value="");
