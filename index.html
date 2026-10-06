@@ -3,153 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AUDIT LAB · UDABOL — Misión de Auditoría</title>
+<title>PROJECT LAB · UDABOL — Rescata el proyecto</title>
 <style>
-:root{--bg:#07101c;--panel:#0e1a2b;--panel2:#12233a;--line:#29415f;--text:#edf6ff;--muted:#9db0c7;--cyan:#42d8ff;--green:#3dde8a;--yellow:#ffd166;--red:#ff647c;--purple:#a98cff}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#183856 0,#07101c 38%,#040912 100%);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
-header{position:sticky;top:0;z-index:10;background:rgba(4,9,18,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav{max-width:1150px;margin:auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{font-weight:900;letter-spacing:.08em}.brand span{color:var(--cyan)}.topscore{font-weight:800;color:var(--cyan)}
+:root{--bg:#07150f;--panel:#0f2a1d;--panel2:#143826;--line:#2d6a4f;--text:#f3f7f2;--muted:#a9c4b4;--accent:#D4A017;--mint:#B7D8C7;--green:#3dde8a;--yellow:#ffd166;--red:#ff647c;--purple:#a98cff;--udagreen:#1B4332}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#1d4a35 0,#07150f 40%,#040d09 100%);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
+header{position:sticky;top:0;z-index:10;background:rgba(4,13,9,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{max-width:1150px;margin:auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{font-weight:900;letter-spacing:.08em}.brand span{color:var(--accent)}.topscore{font-weight:800;color:var(--accent)}
 main{max-width:1150px;margin:auto;padding:28px 20px 60px}.hidden{display:none!important}
-.card{background:linear-gradient(145deg,rgba(18,35,58,.97),rgba(9,18,31,.97));border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 18px 55px rgba(0,0,0,.22)}
-.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}.eyebrow{color:var(--cyan);font-size:11px;font-weight:900;letter-spacing:.17em}.hero h1{font-size:clamp(34px,6vw,58px);line-height:.98;margin:10px 0 14px}.lead{font-size:17px;line-height:1.65;color:var(--muted)}
-input,textarea,select{width:100%;background:#071321;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit;outline:none}input:focus,textarea:focus{border-color:var(--cyan)}textarea{min-height:90px;resize:vertical}
-button{border:0;border-radius:10px;padding:12px 17px;background:var(--cyan);color:#03101a;font-weight:900;cursor:pointer}button.secondary{background:#172b45;color:var(--text);border:1px solid var(--line)}button.danger{background:var(--red);color:#18050a}button:disabled{opacity:.45;cursor:not-allowed}
-.note{padding:13px 15px;border:1px solid var(--line);border-radius:11px;background:#071321;color:var(--muted);line-height:1.55}.note.warn{border-color:var(--yellow);color:#ffe6a4}.note.good{border-color:var(--green);color:#bdf5d5}.note.bad{border-color:var(--red);color:#ffc3cc}
-.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:18px}.step{padding:12px 7px;text-align:center;border:1px solid var(--line);border-radius:10px;background:#091727;font-size:12px}.step b{display:block;font-size:18px;color:var(--cyan);margin-bottom:4px}
-.concepts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.concept{background:#091727;border:1px solid var(--line);border-radius:12px;padding:15px}.concept h3{margin:0 0 7px}.concept p{color:var(--muted);line-height:1.45;font-size:14px}
-.rules{margin-top:18px}.rules li{margin:9px 0;color:#cbd8e7}
-.company-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.company{cursor:pointer;transition:.2s}.company:hover{transform:translateY(-2px);border-color:var(--cyan)}.company h3{margin:6px 0}.company p{color:var(--muted);line-height:1.45}.tag{display:inline-block;border:1px solid var(--line);padding:5px 8px;border-radius:20px;font-size:11px;color:var(--cyan)}
-.header-row{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:18px}.mission-meta{color:var(--muted);font-size:13px}.progress{height:8px;background:#071321;border:1px solid var(--line);border-radius:10px;overflow:hidden}.progress div{height:100%;background:var(--cyan);transition:.3s}
-.evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.evidence{cursor:pointer;min-height:130px;transition:.15s}.evidence:hover{border-color:var(--cyan)}.evidence.opened{border-color:var(--purple);box-shadow:0 0 0 1px rgba(169,140,255,.25)}.evidence h3{margin:7px 0}.evidence p{font-size:13px;color:var(--muted);line-height:1.4}.evidence small{color:var(--purple)}
-.incident{border-left:4px solid var(--red);padding:16px;background:#1c111a;border-radius:10px;line-height:1.6}.question{margin-top:16px}.options{display:grid;gap:9px}.option{padding:13px;border:1px solid var(--line);border-radius:10px;background:#071321;cursor:pointer}.option:hover{border-color:#6286aa}.option.selected{border-color:var(--cyan);background:#0c263c}.option.correct{border-color:var(--green);background:#0b2b20}.option.wrong{border-color:var(--red);background:#32141d}
-.scorebox{display:flex;justify-content:space-between;align-items:center;gap:15px;background:#071321;border:1px solid var(--line);padding:14px;border-radius:12px;margin-top:15px}.points{font-size:27px;font-weight:900;color:var(--cyan)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:15px}.rubric{width:100%;border-collapse:collapse;margin-top:10px}.rubric th,.rubric td{border-bottom:1px solid var(--line);padding:9px;text-align:left;font-size:13px}.rubric th{color:var(--cyan)}
-.final-score{font-size:64px;font-weight:900;color:var(--cyan)}.final-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:15px}
+.card{background:linear-gradient(145deg,rgba(20,56,38,.97),rgba(8,22,15,.97));border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 18px 55px rgba(0,0,0,.25)}
+.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}.eyebrow{color:var(--accent);font-size:11px;font-weight:900;letter-spacing:.17em}.hero h1{font-size:clamp(34px,6vw,56px);line-height:1;margin:10px 0 14px}.lead{font-size:17px;line-height:1.65;color:var(--muted)}
+input,textarea,select{width:100%;background:#08170f;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit;outline:none}input:focus,textarea:focus,select:focus{border-color:var(--accent)}textarea{min-height:90px;resize:vertical}
+button{border:0;border-radius:10px;padding:12px 17px;background:var(--accent);color:#1a1200;font-weight:900;cursor:pointer}button.secondary{background:#173b29;color:var(--text);border:1px solid var(--line)}button:disabled{opacity:.45;cursor:not-allowed}
+.note{padding:13px 15px;border:1px solid var(--line);border-radius:11px;background:#08170f;color:var(--muted);line-height:1.55}.note.warn{border-color:var(--yellow);color:#ffe6a4}.note.good{border-color:var(--green);color:#bdf5d5}.note.bad{border-color:var(--red);color:#ffc3cc}
+.concepts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.concept{background:#0a1d13;border:1px solid var(--line);border-radius:12px;padding:15px}.concept h3{margin:0 0 7px}.concept p{color:var(--muted);line-height:1.45;font-size:14px}
+.rules{margin-top:18px}.rules li{margin:9px 0;color:#d6e4da}
+.company-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.company{cursor:pointer;transition:.2s}.company:hover{transform:translateY(-2px);border-color:var(--accent)}.company h3{margin:6px 0}.company p{color:var(--muted);line-height:1.45}.tag{display:inline-block;border:1px solid var(--line);padding:5px 8px;border-radius:20px;font-size:11px;color:var(--accent)}
+.header-row{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:18px}.mission-meta{color:var(--muted);font-size:13px}.progress{height:8px;background:#08170f;border:1px solid var(--line);border-radius:10px;overflow:hidden}.progress div{height:100%;background:var(--accent);transition:.3s}
+.evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.evidence{cursor:pointer;min-height:130px;transition:.15s}.evidence:hover{border-color:var(--accent)}.evidence.opened{border-color:var(--purple);box-shadow:0 0 0 1px rgba(169,140,255,.25)}.evidence h3{margin:7px 0}.evidence p{font-size:13px;color:var(--muted);line-height:1.4}.evidence small{color:var(--purple)}
+.incident{border-left:4px solid var(--red);padding:16px;background:#2a141a;border-radius:10px;line-height:1.6}.question{margin-top:16px}.options{display:grid;gap:9px}.option{padding:13px;border:1px solid var(--line);border-radius:10px;background:#08170f;cursor:pointer}.option:hover{border-color:#6fa386}.option.selected{border-color:var(--yellow);background:#2a3519;box-shadow:0 0 0 1px rgba(255,209,102,.25)}
+.points{font-size:27px;font-weight:900;color:var(--accent)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:15px}.rubric{width:100%;border-collapse:collapse;margin-top:10px}.rubric th,.rubric td{border-bottom:1px solid var(--line);padding:9px;text-align:left;font-size:13px}.rubric th{color:var(--accent)}
+.final-score{font-size:64px;font-weight:900;color:var(--accent)}.final-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:15px}
 footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
-@media(max-width:800px){.hero,.two,.final-grid{grid-template-columns:1fr}.company-grid{grid-template-columns:1fr}.concepts{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.evidence-grid{grid-template-columns:1fr 1fr}.nav{padding:12px 14px}}
-
 .review-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px}
-.review-step{padding:12px 8px;text-align:center;border:1px solid var(--line);border-radius:11px;background:#091727;color:var(--text);font-weight:800;cursor:pointer;transition:.15s}
-.review-step:hover{border-color:var(--cyan);transform:translateY(-1px)}
-.review-step.active{border-color:var(--cyan);background:#102b43;box-shadow:0 0 0 1px rgba(66,216,255,.2)}
-.review-panel{margin-top:12px;padding:16px;border:1px solid var(--cyan);border-radius:12px;background:#071321;line-height:1.6}
-.review-panel h3{margin:0 0 6px;color:var(--cyan)}
-.review-panel .example{margin-top:10px;padding:11px;border-left:3px solid var(--green);background:#0a1c1a;border-radius:6px}
-@media(max-width:800px){.review-steps{grid-template-columns:repeat(2,1fr)}}
-
-.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
-.review-card{width:100%;text-align:left;background:linear-gradient(145deg,#102b25,#0a1918);color:var(--text);border:1px solid #2f6f50;border-radius:14px;padding:16px;cursor:pointer;transition:.2s;position:relative}
+.review-step{padding:12px 8px;text-align:center;border:1px solid var(--line);border-radius:11px;background:#0a1d13;color:var(--text);font-weight:800;cursor:pointer;transition:.15s}
+.review-step:hover{border-color:var(--accent);transform:translateY(-1px)}
+.review-step.active{border-color:var(--accent);background:#1c3b2a;box-shadow:0 0 0 1px rgba(212,160,23,.25)}
+.review-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.review-card{width:100%;text-align:left;background:linear-gradient(145deg,#12331f,#0a1b12);color:var(--text);border:1px solid #2f6f50;border-radius:14px;padding:16px;cursor:pointer;transition:.2s;position:relative}
 .review-card:hover{transform:translateY(-2px);border-color:var(--green);box-shadow:0 8px 25px rgba(23,133,72,.18)}
-.review-card.active{border-color:var(--red);box-shadow:0 0 0 1px rgba(217,39,46,.35)}
+.review-card.active{border-color:var(--accent);box-shadow:0 0 0 1px rgba(212,160,23,.35)}
 .review-card .num{display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:50%;background:var(--udagreen);font-weight:900;margin-bottom:8px}
 .review-card h3{margin:3px 0 5px;font-size:16px}
 .review-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
-.review-panel{margin-top:14px;border-left:4px solid var(--red);background:linear-gradient(145deg,#122b22,#091713);border-radius:12px;padding:18px;min-height:100px}
-.review-panel h3{margin:0 0 7px}
-.example{margin-top:12px;padding:12px;border-radius:10px;background:#071321;border:1px solid #315b47;color:#cfe9dc;line-height:1.5}
-@media(max-width:800px){.review-grid{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}}
-.answer-review{display:grid;gap:10px;margin-top:12px}.answer-item{padding:12px;border:1px solid #29415f;border-radius:10px;background:#0a1726}.answer-item strong{display:block;margin-bottom:5px}.answer-item .right{color:#71e3a0}.answer-item .chosen{color:#ffd166}.lock-card{border:1px solid #2f6f50;background:#0b1d18}.option.selected{border-color:var(--yellow);background:#26351c;box-shadow:0 0 0 1px rgba(255,209,102,.25)}
-
-
-
+.review-panel{margin-top:14px;border-left:4px solid var(--accent);background:linear-gradient(145deg,#122b22,#091713);border-radius:12px;padding:18px;min-height:100px;line-height:1.6}
+.review-panel h3{margin:0 0 7px;color:var(--accent)}
+.example{margin-top:12px;padding:12px;border-radius:10px;background:#08170f;border:1px solid #315b47;color:#cfe9dc;line-height:1.5}
+.answer-review{display:grid;gap:10px;margin-top:12px}.answer-item{padding:12px;border:1px solid #2d6a4f;border-radius:10px;background:#0a1d13}.answer-item strong{display:block;margin-bottom:5px}.answer-item .right{color:#71e3a0}.answer-item .chosen{color:#ffd166}.answer-item .why{display:block;margin-top:6px;color:var(--muted);font-size:13px;line-height:1.5}
 .field-hint{display:block;font-size:12px;color:var(--muted);margin:4px 0 6px}
 .char-counter{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:3px}
 .char-counter.ok{color:var(--green);font-weight:700}
 .char-counter.low{color:var(--yellow)}
-
-
-/* ===== AUDIT SYSTEM SIMULATOR 2.0 ===== */
-.audit-console{display:grid;grid-template-columns:1.05fr .95fr;gap:14px;margin-top:14px}.audit-modules{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.audit-module{background:#071321;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:left;cursor:pointer;color:var(--text);transition:.15s}.audit-module:hover{border-color:var(--cyan);transform:translateY(-1px)}.audit-module.active{border-color:var(--cyan);background:#10263b}.audit-module .icon{font-size:24px;display:block;margin-bottom:6px}.audit-module b{display:block}.audit-module small{display:block;color:var(--muted);margin-top:4px}.audit-panel{background:#071321;border:1px solid var(--line);border-radius:12px;padding:16px;min-height:235px}.audit-panel h3{margin:0 0 8px;color:var(--cyan)}.audit-screen{background:#040b13;border:1px solid #1f344a;border-radius:10px;padding:14px;margin-top:10px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;line-height:1.55;color:#d9e9f7}.audit-action{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}.audit-action button{background:var(--cyan);color:#03101a}.audit-result{margin-top:10px;padding:12px;border-radius:9px;border:1px solid var(--yellow);background:#1b1810;color:#ffe6a4}.audit-result.good{border-color:var(--green);background:#0b2018;color:#bdf5d5}.audit-result.bad{border-color:var(--red);background:#28131a;color:#ffc3cc}.test-badge{display:inline-block;padding:5px 8px;border-radius:20px;background:#10263b;color:var(--cyan);border:1px solid var(--line);font-size:11px;font-weight:800;margin-bottom:7px}@media(max-width:800px){.audit-console{grid-template-columns:1fr}.audit-modules{grid-template-columns:1fr 1fr}}
+@media(max-width:800px){.hero,.two,.final-grid{grid-template-columns:1fr}.company-grid{grid-template-columns:1fr}.concepts{grid-template-columns:1fr}.evidence-grid{grid-template-columns:1fr 1fr}.nav{padding:12px 14px}.review-steps{grid-template-columns:repeat(2,1fr)}.review-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-<header><div class="nav"><div class="brand">🛡️ AUDIT <span>LAB</span> · UDABOL <small style="display:block;color:var(--muted);font-size:10px;letter-spacing:0">Docente: Ing. Iver Guerrero Ortiz</small></div><div class="topscore" id="headerScore">0 / 20 pts</div></div></header>
+<header><div class="nav"><div class="brand">📋 PROJECT <span>LAB</span> · UDABOL <small style="display:block;color:var(--muted);font-size:10px;letter-spacing:0">Docente: Ing. Iver Guerrero Ortiz</small></div><div class="topscore" id="headerScore">0 / 40 pts</div></div></header>
 <main>
 
 <section id="intro">
 <div class="hero">
 <div class="card">
-<div class="eyebrow">AUDITORÍA DE SISTEMAS · PRÁCTICA 01</div>
-<h1>El control dice que funciona.<br><span style="color:var(--cyan)">Tú debes demostrarlo.</span></h1>
-<p class="lead">En esta misión trabajarás como auditor. No basta con reconocer un control: tendrás que leer el caso, separar pistas útiles de información irrelevante, revisar evidencias, probar el control y documentar un hallazgo.</p>
+<div class="eyebrow">GESTIÓN DE PROYECTOS MULTIMEDIA · PRÁCTICA 01</div>
+<h1>El proyecto parecía bien.<br><span style="color:var(--accent)">Tú debes encontrar qué falló.</span></h1>
+<p class="lead">En esta misión llegas como gestor de proyecto a rescatar un lanzamiento crossmedia en crisis. No basta con opinar: tendrás que revisar evidencias, descartar pistas que distraen, diagnosticar la falla, proponer una medida y entregar un plan de corrección.</p>
 <div class="two">
 <label><b>Grupo</b>
 <select id="groupName">
 <option value="">Selecciona tu grupo</option>
-<option>Grupo 1</option><option>Grupo 2</option><option>Grupo 3</option>
-<option>Grupo 4</option><option>Grupo 5</option><option>Grupo 6</option>
-<option>Grupo 7</option><option>Grupo 8</option>
+<option>Grupo 1</option><option>Grupo 2</option><option>Grupo 3</option><option>Grupo 4</option>
+<option>Grupo 5</option><option>Grupo 6</option><option>Grupo 7</option><option>Grupo 8</option>
 </select></label>
-<label><b>Integrantes / nombre del auditor</b>
+<label><b>Integrantes</b>
 <input id="studentName" placeholder="Nombres de los integrantes"></label>
 </div>
-<div style="margin-top:13px"><button onclick="start()">ENTRAR AL AUDIT LAB →</button></div>
+<div style="margin-top:13px"><button onclick="start()">ENTRAR AL PROJECT LAB →</button></div>
 </div>
 <div class="card">
 <div class="eyebrow">ANTES DE EMPEZAR · RECORDATORIO</div>
-<div class="concepts" style="grid-template-columns:repeat(3,1fr)">
-<button type="button" class="concept review-card" onclick="showReview('preventivo',this)"><h3>🛡️ Preventivo</h3><p>Evita o reduce la posibilidad de que ocurra el problema.</p></button>
-<button type="button" class="concept review-card" onclick="showReview('detectivo',this)"><h3>👁️ Detectivo</h3><p>Ayuda a descubrir una situación o error.</p></button>
-<button type="button" class="concept review-card" onclick="showReview('correctivo',this)"><h3>🔧 Correctivo</h3><p>Actúa para corregir o contener un problema.</p></button>
+<div class="concepts">
+<button type="button" class="concept review-card" onclick="showReview('scrum',this)"><h3>🔁 Scrum</h3><p>Avances cortos y revisión constante.</p></button>
+<button type="button" class="concept review-card" onclick="showReview('kanban',this)"><h3>📌 Kanban</h3><p>Tablero visual de tareas.</p></button>
+<button type="button" class="concept review-card" onclick="showReview('roles',this)"><h3>👥 Roles</h3><p>Cada persona, una responsabilidad clara.</p></button>
 </div>
 </div>
 </div>
 
 <div class="card" style="margin-top:18px">
 <div class="eyebrow">LO QUE YA APRENDISTE</div>
-<div class="section-title-uda"><h2 style="margin:0">Repaso de conceptos</h2></div>
-<p class="lead" style="font-size:14px;margin:8px 0 0">Haz clic en cada concepto para recordar qué significa y ver un ejemplo aplicado a auditoría de sistemas.</p>
+<h2 style="margin:6px 0 0">Repaso de conceptos</h2>
+<p class="lead" style="font-size:14px;margin:8px 0 0">Haz clic en cada concepto para recordar qué significa y ver un ejemplo aplicado a un proyecto crossmedia.</p>
 <div class="review-grid">
-<button type="button" class="review-card" onclick="showReview('entrada',this)">
-<span class="num">01</span><h3>📥 Entrada</h3><p>Información que ingresa al sistema o proceso.</p>
-</button>
-<button type="button" class="review-card" onclick="showReview('procesamiento',this)">
-<span class="num">02</span><h3>⚙️ Procesamiento</h3><p>Transformación, validación o tratamiento de la información.</p>
-</button>
-<button type="button" class="review-card" onclick="showReview('salida',this)">
-<span class="num">03</span><h3>📤 Salida</h3><p>Información o resultado que genera el sistema.</p>
-</button>
-<button type="button" class="review-card" onclick="showReview('preventivo',this)">
-<span class="num">04</span><h3>🛡️ Preventivo</h3><p>Busca evitar que ocurra un error o evento no deseado.</p>
-</button>
-<button type="button" class="review-card" onclick="showReview('detectivo',this)">
-<span class="num">05</span><h3>👁️ Detectivo</h3><p>Busca descubrir un error o situación después de ocurrida.</p>
-</button>
-<button type="button" class="review-card" onclick="showReview('correctivo',this)">
-<span class="num">06</span><h3>🔧 Correctivo</h3><p>Actúa para corregir o contener un problema detectado.</p>
-</button>
+<button type="button" class="review-card" onclick="showReview('planificacion',this)"><span class="num">01</span><h3>🗓️ Planificación</h3><p>Se define antes de producir.</p></button>
+<button type="button" class="review-card" onclick="showReview('produccion',this)"><span class="num">02</span><h3>🎬 Producción</h3><p>Se crea el contenido.</p></button>
+<button type="button" class="review-card" onclick="showReview('revision',this)"><span class="num">03</span><h3>✅ Revisión</h3><p>Se aprueba antes de publicar.</p></button>
+<button type="button" class="review-card" onclick="showReview('publicacion',this)"><span class="num">04</span><h3>📣 Publicación</h3><p>El contenido sale al público.</p></button>
 </div>
-<div class="section-title-uda" style="margin-top:20px"><h2 style="margin:0;font-size:21px">Del concepto al trabajo del auditor</h2></div>
+<h2 style="margin:22px 0 0;font-size:21px">Del síntoma a la solución</h2>
 <div class="review-steps">
-<button type="button" class="review-step" onclick="showReview('riesgo',this)">1 · Riesgo</button>
-<button type="button" class="review-step" onclick="showReview('control',this)">2 · Control</button>
-<button type="button" class="review-step" onclick="showReview('evidencia',this)">3 · Evidencia</button>
-<button type="button" class="review-step" onclick="showReview('prueba',this)">4 · Prueba</button>
-<button type="button" class="review-step" onclick="showReview('resultado',this)">5 · Resultado</button>
-<button type="button" class="review-step" onclick="showReview('hallazgo',this)">6 · Hallazgo</button>
+<button type="button" class="review-step" onclick="showReview('sintoma',this)">1 · Síntoma</button>
+<button type="button" class="review-step" onclick="showReview('evidencia',this)">2 · Evidencia</button>
+<button type="button" class="review-step" onclick="showReview('diagnostico',this)">3 · Diagnóstico</button>
+<button type="button" class="review-step" onclick="showReview('causa',this)">4 · Causa</button>
+<button type="button" class="review-step" onclick="showReview('impacto',this)">5 · Impacto</button>
+<button type="button" class="review-step" onclick="showReview('correccion',this)">6 · Corrección</button>
 </div>
 <div id="reviewPanel" class="review-panel">
 <h3>📚 Repaso rápido</h3>
-<p>Haz clic en cualquiera de los seis conceptos para leer una explicación y un ejemplo antes de comenzar la misión.</p>
+<p>Haz clic en cualquiera de los conceptos para leer una explicación y un ejemplo antes de comenzar la misión.</p>
 </div>
 <ul class="rules">
-<li>🔎 <b>No todo dato es evidencia útil.</b> Debes analizar qué demuestra realmente cada documento.</li>
-<li>🧩 <b>Puede haber pistas que distraen.</b> No elijas una conclusión solo porque un dato parezca importante.</li>
-<li>⚠️ <b>Un control puede existir y aun así no funcionar.</b></li>
-<li>📄 <b>Tu hallazgo debe apoyarse en evidencia.</b></li>
+<li>🔎 <b>No todo dato es evidencia útil.</b> Algunos documentos no explican el problema.</li>
+<li>🧩 <b>Hay pistas que distraen.</b> Un presupuesto o un número de seguidores no siempre importan.</li>
+<li>⚠️ <b>Un proyecto puede tener tablero y roles y aun así fallar en otra etapa.</b></li>
+<li>📄 <b>Tu plan de corrección debe apoyarse en las evidencias.</b></li>
 </ul>
 </div>
 
 <div class="card" style="margin-top:18px">
 <div class="eyebrow">VALOR DE LA ACTIVIDAD</div>
-<h2 style="margin:8px 0">20 puntos</h2>
+<h2 style="margin:8px 0">40 puntos</h2>
 <table class="rubric">
-<tr><th>Componente</th><th>Puntos</th></tr>
-<tr><td>Análisis de evidencias</td><td>4</td></tr>
-<tr><td>Identificación del control y tipo</td><td>4</td></tr>
-<tr><td>Prueba del control</td><td>4</td></tr>
-<tr><td>Resultado y justificación</td><td>4</td></tr>
-<tr><td>Hallazgo y recomendación</td><td>4</td></tr>
+<tr><th>Componente</th><th>Puntos</th><th>Cómo se califica</th></tr>
+<tr><td>Evidencias útiles revisadas</td><td>8</td><td>Automático</td></tr>
+<tr><td>Diagnóstico de la falla</td><td>6</td><td>Automático</td></tr>
+<tr><td>Medida correctiva</td><td>6</td><td>Automático</td></tr>
+<tr><td>Etapa donde se pudo evitar</td><td>4</td><td>Automático</td></tr>
+<tr><td>Papel de trabajo y plan de corrección</td><td>16</td><td>Revisión del docente</td></tr>
 </table>
 </div>
 </section>
@@ -157,8 +127,8 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <section id="choose" class="hidden">
 <div class="card">
 <div class="eyebrow">MISIÓN DE GRUPO</div>
-<h1 style="font-size:38px;margin:8px 0">Elijan su empresa</h1>
-<p class="lead">Cada grupo escogerá <b>una sola empresa</b>. No elijan por el nombre: cada caso contiene información que puede llevar a conclusiones equivocadas.</p>
+<h1 style="font-size:38px;margin:8px 0">Elijan su proyecto</h1>
+<p class="lead">Cada grupo escogerá <b>un solo negocio</b>. No elijan por el nombre: cada caso contiene información que puede llevar a conclusiones equivocadas.</p>
 <div class="company-grid" id="companies"></div>
 </div>
 </section>
@@ -166,7 +136,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <section id="mission" class="hidden">
 <div class="header-row">
 <div><div class="eyebrow" id="missionNo"></div><h1 style="font-size:34px;margin:5px 0" id="missionTitle"></h1><div class="mission-meta" id="missionMeta"></div></div>
-<div style="text-align:right"><div class="points" id="livePoints">0 / 20</div><div class="mission-meta">puntos</div></div>
+<div style="text-align:right"><div class="points" id="livePoints">0 / 40</div><div class="mission-meta">puntos</div></div>
 </div>
 <div class="progress"><div id="bar" style="width:0%"></div></div>
 
@@ -179,47 +149,47 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <div class="card question">
 <div class="eyebrow">FASE 02 · INVESTIGACIÓN</div>
 <h2 style="margin:7px 0">📂 Sala de evidencias</h2>
-<p class="mission-meta">Abre las evidencias que consideres necesarias. Algunas contienen datos útiles y otras pueden ser irrelevantes para el hallazgo.</p>
+<p class="mission-meta">Abre las evidencias que consideres necesarias (mínimo 3). Algunas explican la falla y otras pueden ser irrelevantes.</p>
 <div class="evidence-grid" id="evidence"></div>
 <div id="detail" class="note hidden" style="margin-top:13px"></div>
 </div>
 
 <div class="card question">
-<div class="eyebrow">FASE 03 · ANÁLISIS</div>
-<h2 style="margin:7px 0">¿Qué control estás auditando?</h2>
+<div class="eyebrow">FASE 03 · DIAGNÓSTICO</div>
+<h2 style="margin:7px 0">¿Qué falló principalmente?</h2>
 <p id="controlPrompt"></p>
 <div class="options" id="controlOptions"></div>
 <div id="controlFeedback" class="note hidden" style="margin-top:12px"></div>
 </div>
 
 <div class="card question">
-<div class="eyebrow">FASE 04 · PRUEBA REAL</div>
-<h2 style="margin:7px 0">🧪 Usa el sistema y comprueba el control</h2>
-<p class="mission-meta">No te diremos dónde está el fallo. Explora los módulos, ejecuta una prueba y observa el resultado.</p>
-<div class="audit-console"><div class="audit-modules" id="auditModules"></div><div class="audit-panel" id="auditPanel"><span class="test-badge">LABORATORIO</span><h3>Selecciona un módulo</h3><p>Obtén evidencia mediante una acción del sistema.</p></div></div>
+<div class="eyebrow">FASE 04 · CORRECCIÓN</div>
+<h2 style="margin:7px 0">¿Qué medida lo corrige mejor?</h2>
+<p id="testPrompt"></p>
+<div class="options" id="testOptions"></div>
 <div id="testFeedback" class="note hidden" style="margin-top:12px"></div>
 </div>
 
 <div class="card question">
-<div class="eyebrow">FASE 05 · DICTAMEN</div>
-<h2 style="margin:7px 0">¿Qué concluyes?</h2>
+<div class="eyebrow">FASE 05 · ETAPA</div>
+<h2 style="margin:7px 0">¿En qué etapa se pudo evitar el problema?</h2>
 <div class="options" id="verdictOptions"></div>
 <div id="verdictFeedback" class="note hidden" style="margin-top:12px"></div>
 </div>
 
 <div class="card question paper-work">
 <div class="eyebrow">FASE 06 · PAPEL DE TRABAJO</div>
-<h2 style="margin:7px 0">Documenta el hallazgo</h2>
-<p class="paper-help">Redacta cada elemento con base en las evidencias revisadas. <b>Mínimo 30 caracteres por campo.</b></p>
+<h2 style="margin:7px 0">Documenta el caso <small style="font-size:13px;color:var(--accent)">· 16 puntos, los califica el docente</small></h2>
+<p class="paper-help">Redacta cada elemento con base en las evidencias revisadas. <b>Mínimo 30 caracteres por campo y 80 en el plan de corrección.</b></p>
 <div class="two">
-<label><b>Condición</b><span class="field-hint">Qué encontraste · mínimo 30 caracteres</span><textarea id="condition" minlength="30" placeholder="Describe el hecho o situación encontrada con evidencia."></textarea><small class="char-counter" id="conditionCount">0/30</small></label>
-<label><b>Criterio</b><span class="field-hint">Qué debería ocurrir · mínimo 30 caracteres</span><textarea id="criterion" minlength="30" placeholder="Indica la norma, política, procedimiento o condición esperada."></textarea><small class="char-counter" id="criterionCount">0/30</small></label>
-<label><b>Causa o posible causa</b><span class="field-hint">Por qué podría ocurrir · mínimo 30 caracteres</span><textarea id="cause" minlength="30" placeholder="Explica la causa solo si existe evidencia suficiente; de lo contrario, indícalo."></textarea><small class="char-counter" id="causeCount">0/30</small></label>
-<label><b>Efecto / riesgo</b><span class="field-hint">Qué consecuencia puede producir · mínimo 30 caracteres</span><textarea id="effect" minlength="30" placeholder="Explica la consecuencia o riesgo que podría producirse."></textarea><small class="char-counter" id="effectCount">0/30</small></label>
+<label><b>Diagnóstico</b><span class="field-hint">Qué encontraron en las evidencias · mínimo 30 caracteres</span><textarea id="condition" placeholder="Describe los hechos que muestran las evidencias, citando datos concretos."></textarea><small class="char-counter" id="conditionCount">0/30</small></label>
+<label><b>Cómo debería funcionar</b><span class="field-hint">Cómo trabaja un proyecto bien gestionado · mínimo 30 caracteres</span><textarea id="criterion" placeholder="Indica cómo debería haberse organizado el trabajo (roles, fechas, revisión, publicación)."></textarea><small class="char-counter" id="criterionCount">0/30</small></label>
+<label><b>Causa del problema</b><span class="field-hint">Por qué ocurrió · mínimo 30 caracteres</span><textarea id="cause" placeholder="Explica la causa de fondo. Si las evidencias no alcanzan, indícalo."></textarea><small class="char-counter" id="causeCount">0/30</small></label>
+<label><b>Impacto en el negocio</b><span class="field-hint">Qué consecuencia tuvo o podría tener · mínimo 30 caracteres</span><textarea id="effect" placeholder="Explica el efecto en clientes, ventas o imagen del negocio."></textarea><small class="char-counter" id="effectCount">0/30</small></label>
 </div>
-<label style="display:block;margin-top:12px"><b>Recomendación</b><span class="field-hint">Qué mejora propones · mínimo 30 caracteres</span><textarea id="recommendation" minlength="30" placeholder="Propón una mejora concreta y relacionada con el hallazgo."></textarea><small class="char-counter" id="recommendationCount">0/30</small></label>
+<label style="display:block;margin-top:12px"><b>Plan de corrección (tablero Kanban)</b><span class="field-hint">Escribe tu tablero corregido: al menos 5 tareas, cada una con responsable y plataforma · mínimo 80 caracteres</span><textarea id="recommendation" placeholder="Ejemplo: Por hacer: Aprobar el post — Dueño — Instagram. En proceso: ... Listo: ..."></textarea><small class="char-counter" id="recommendationCount">0/80</small></label>
 <div class="note warn" style="margin-top:13px">⚠️ No inventes información. Si una causa no está demostrada por las evidencias, puedes escribir: <b>“No se cuenta con evidencia suficiente para determinar la causa.”</b></div>
-<div style="margin-top:15px"><button onclick="submitMission()">FINALIZAR Y GENERAR DICTAMEN</button></div>
+<div style="margin-top:15px"><button onclick="submitMission()">FINALIZAR Y ENTREGAR</button></div>
 <div id="submitMsg" class="note hidden" style="margin-top:12px"></div>
 </div>
 </section>
@@ -230,105 +200,146 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <h1 style="font-size:42px;margin:8px 0">Misión completada</h1>
 <p class="lead" id="finalIntro"></p>
 <div class="final-grid">
-<div class="card"><div class="eyebrow">PUNTAJE</div><div class="final-score" id="finalScore"></div><p id="finalBreakdown"></p></div>
-<div class="card"><div class="eyebrow">DICTAMEN</div><h2 id="finalVerdict"></h2><p id="finalSummary" class="lead"></p></div>
+<div class="card"><div class="eyebrow">PUNTAJE AUTOMÁTICO</div><div class="final-score" id="finalScore"></div><p id="finalBreakdown"></p></div>
+<div class="card"><div class="eyebrow">ETAPA DEL PROBLEMA</div><h2 id="finalVerdict"></h2><p id="finalSummary" class="lead"></p></div>
 </div>
 <div class="card" style="margin-top:15px">
 <div class="eyebrow">RETROALIMENTACIÓN FINAL</div>
 <h3>🔎 Revisión del análisis</h3>
 <div id="finalReview"></div>
 </div>
-<div class="note good" style="margin-top:15px">🔒 Esta auditoría ya fue registrada. Al recargar la página, el laboratorio conservará el resultado y no permitirá iniciar una nueva auditoría desde este dispositivo.</div>
+<div class="note good" style="margin-top:15px">🔒 Este proyecto ya fue registrado. Al recargar la página se conservará el resultado y no se podrá iniciar de nuevo desde este dispositivo.</div>
 </div>
 </section>
 </main>
-<footer>AUDIT LAB · UDABOL · Actividad práctica — 20 puntos<br><b>Docente: Ing. Iver Guerrero Ortiz</b></footer>
+<footer>PROJECT LAB · UDABOL · Actividad práctica — 40 puntos<br><b>Docente: Ing. Iver Guerrero Ortiz</b></footer>
 
 <script>
 /* ===== CONFIGURACIÓN =====
-   Pega aquí la URL /exec de tu Web App de Google Apps Script.
-   Ejemplo: https://script.google.com/macros/s/XXXXXXXX/exec
-*/
+   URL /exec de la Web App de Google Apps Script (la misma hoja de siempre). */
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRYg1Dbn0ig521Bqe5m5zDn0PI-qbloRS5e7wSlweZ5yzVVNAkJxsK6uPZTWgWSpWQ/exec";
+const STORAGE_PREFIX = "projectLab_";
+const MIN = {condition:30,criterion:30,cause:30,effect:30,recommendation:80};
+const FIELDS = ["condition","criterion","cause","effect","recommendation"];
+const STAGES = ["Planificación","Producción","Revisión","Publicación"];
+const STAGE_DESC = ["Antes de producir: objetivo, fechas, roles","Cuando se crea el contenido","Antes de publicar: alguien aprueba","Cuando el contenido sale al público"];
 
+/* Evidencia: [icono, título, detalle, ¿es útil?] */
 const companies=[
-{title:"🏥 Clínica Santa Cruz",tag:"PACIENTES · HISTORIAS CLÍNICAS",meta:"Sistema de admisión y atención",context:"La clínica afirma que solo el personal autorizado puede consultar historias clínicas. El administrador muestra una política de acceso y asegura que el control está activo.",incident:"🚨 INCIDENTE: El área de auditoría detectó que una historia clínica fue consultada fuera del horario habitual. El administrador dice que probablemente fue una consulta autorizada de emergencia.",controlPrompt:"¿Cuál es el control que corresponde investigar?",controls:["Control de acceso y registro de consultas a historias clínicas.","Control de inventario de medicamentos.","Control de cálculo de facturación.","Control de impresión de reportes."],controlCorrect:0,testPrompt:"¿Qué prueba sería más adecuada?",tests:["Revisar una política general y asumir que se cumple.","Comparar usuarios autorizados con los registros de acceso y revisar una consulta fuera de horario.","Preguntar únicamente al administrador si fue una emergencia.","Revisar el precio de los servicios médicos."],testCorrect:1,verdict:"no",evidence:[
-["📋","Política de acceso","Las historias clínicas deben ser consultadas solo por perfiles autorizados y las consultas deben quedar registradas."],
-["👤","Usuario 184","Rol: Auxiliar administrativo<br>Permiso declarado: <b>Sin acceso clínico</b>"],
-["🖥️","Log de consulta","30/09 · 23:48<br>Historia: HC-7781<br>Usuario: usr184<br><b>Consulta exitosa</b>"],
-["🚑","Registro de emergencia","23:40–00:10<br>Paciente: HC-7781<br><b>Atención de emergencia registrada</b>"],
-["🔐","Perfil del usuario","usr184<br>Perfil: Auxiliar administrativo<br><b>Permiso efectivo: CONSULTA_HC = TRUE</b>"],
-["📊","Reporte mensual","Consultas fuera de horario: 7<br>Incidentes reportados: 0"]]},
-{title:"💊 Farmacia Vida",tag:"INVENTARIO · VENTAS",meta:"Sistema de farmacia",context:"La farmacia declara que el sistema valida stock antes de confirmar una venta. El jefe muestra el procedimiento y dice que el control evita errores de inventario.",incident:"🚨 INCIDENTE: Apareció una venta de 20 unidades cuando el inventario previo mostraba 5. El cajero afirma que el sistema suele bloquear esas ventas.",controlPrompt:"¿Qué control corresponde investigar?",controls:["Validación de stock antes de confirmar la venta.","Control de contraseñas del personal.","Control de respaldo de la base de datos.","Control de impresión de facturas."],controlCorrect:0,testPrompt:"¿Qué prueba permite comprobar directamente el control?",tests:["Intentar registrar una venta superior al stock disponible y observar el resultado.","Entrevistar al cajero y aceptar su explicación como evidencia suficiente.","Revisar el diseño del logotipo del sistema.","Revisar solamente el manual de usuario."],testCorrect:0,verdict:"no",evidence:[
-["📦","Inventario","MED-001 · Paracetamol 500 mg<br>Stock antes de la venta: <b>5</b>"],
-["🧾","Factura #4582","MED-001<br>Cantidad: <b>20</b><br>Estado: APROBADA"],
-["🖥️","Log de venta","10:42:17 Stock consultado: 5<br>10:42:18 Cantidad: 20<br><b>10:42:19 Venta aprobada</b>"],
-["👤","Cajero03","Rol: Cajero<br>Estado: Activo<br>Capacitación: vigente"],
-["📋","Procedimiento","El sistema debe bloquear cuando cantidad solicitada > stock disponible."],
-["📈","Inventario posterior","Stock registrado: <b>-15</b><br>Movimiento: salida de 20 unidades"]]},
-{title:"🎓 Universidad del Sur",tag:"NOTAS · ACADÉMICO",meta:"Sistema de calificaciones",context:"La universidad establece que las notas no pueden modificarse después del cierre del período, salvo mediante un procedimiento autorizado.",incident:"🚨 INCIDENTE: Una nota cambió de 68 a 95 después del cierre. El docente afirma que fue una corrección legítima.",controlPrompt:"¿Qué control debe investigarse?",controls:["Bloqueo de modificaciones después del cierre y autorización de excepciones.","Control de inventario de equipos.","Control de asistencia física.","Control de respaldo eléctrico."],controlCorrect:0,testPrompt:"¿Qué prueba aporta mayor evidencia?",tests:["Intentar modificar una nota con el período cerrado o revisar un registro equivalente y su autorización.","Preguntar al docente si recuerda haber hecho el cambio.","Revisar el horario de clases.","Revisar la página pública de la universidad."],testCorrect:0,verdict:"no",evidence:[
-["📅","Período académico","Gestión 2026-I<br>Estado: <b>CERRADO</b>"],
-["📝","Historial de nota","Estudiante: 2026-014<br>68 → <b>95</b><br>Fecha: 30/09"],
-["🖥️","Log","18:15 Cambio guardado<br>Usuario: docente07<br><b>Resultado: EXITOSO</b>"],
-["📋","Procedimiento de excepción","Toda modificación posterior al cierre requiere solicitud y autorización del responsable académico."],
-["✅","Solicitud de excepción","Registro: <b>NO ENCONTRADO</b>"],
-["👤","Perfil docente07","Rol: Docente<br>Permiso: modificación de notas = <b>ACTIVO</b>"]]},
-{title:"🏦 Banco Andino",tag:"USUARIOS · ACCESOS",meta:"Gestión de cuentas internas",context:"El banco tiene un procedimiento de baja de usuarios: cuando un empleado se retira, su cuenta debe deshabilitarse dentro de 24 horas.",incident:"🚨 INCIDENTE: Un empleado retirado aparece con actividad reciente. Recursos Humanos indica que su retiro fue registrado correctamente.",controlPrompt:"¿Qué control se debe investigar?",controls:["Deshabilitación oportuna de cuentas de empleados retirados.","Control de impresión de estados de cuenta.","Control de caja física.","Control de mantenimiento de impresoras."],controlCorrect:0,testPrompt:"¿Qué prueba es más sólida?",tests:["Comparar el listado de empleados retirados con el estado de sus cuentas y sus últimos accesos.","Preguntar al guardia si conoce al empleado.","Revisar el organigrama.","Revisar el correo institucional del gerente."],testCorrect:0,verdict:"no",evidence:[
-["👤","Recursos Humanos","Empleado: Carlos M.<br>Retiro efectivo: <b>02/07/2026</b>"],
-["🔐","Cuenta cmendoza","Estado: <b>ACTIVA</b><br>Última modificación: 02/07"],
-["🖥️","Log de acceso","30/09 · 22:13<br>Usuario: cmendoza<br><b>Acceso exitoso</b>"],
-["📋","Procedimiento","Baja de usuario: deshabilitar cuenta en máximo 24 horas."],
-["🎫","Ticket de baja","Ticket #8841<br>Estado: <b>CERRADO</b><br>Fecha: 03/07"],
-["⚙️","Sistema IAM","Sincronización RH → IAM: <b>ERROR</b><br>Última sincronización correcta: 01/07"]]},
-{title:"🛒 Supermercado Norte",tag:"VENTAS · DUPLICADOS",meta:"Sistema de facturación",context:"El sistema debe impedir que una misma factura sea registrada dos veces. El jefe de caja dice que existen controles automáticos para evitar duplicados.",incident:"🚨 INCIDENTE: La factura 000784 aparece dos veces y el inventario se descontó en ambas operaciones.",controlPrompt:"¿Qué control debe investigarse?",controls:["Detección de facturas duplicadas antes de registrar la transacción.","Control de acceso físico al depósito.","Control de vacaciones del personal.","Control de temperatura de refrigeradores."],controlCorrect:0,testPrompt:"¿Qué prueba comprobaría mejor el control?",tests:["Registrar nuevamente una factura con el mismo identificador y observar si el sistema la bloquea o alerta.","Preguntar al jefe de caja si el control existe.","Revisar las cámaras del estacionamiento.","Revisar el manual de recursos humanos."],testCorrect:0,verdict:"no",evidence:[
-["🧾","Factura 000784","Total: Bs 420<br>Estado: <b>REGISTRADA</b><br>Hora: 14:05"],
-["🧾","Factura duplicada","Total: Bs 420<br>Estado: <b>REGISTRADA</b><br>Hora: 14:07"],
-["📦","Inventario","Producto TV-42<br>Descuento: <b>2 veces</b>"],
-["🖥️","Log","14:05 Factura 000784 creada<br>14:07 Factura 000784 creada<br><b>Sin alerta</b>"],
-["📋","Regla del sistema","El número de factura debe ser único."],
-["🧪","Prueba histórica","Últimos 30 días: 4 casos similares<br><b>0 alertas automáticas</b>"]]}
+{title:"🍗 Pollos El Solar",tag:"PROMOCIÓN · ROLES",meta:"Lanzamiento del Combo Familiar",
+context:"Pollos El Solar lanza el «Combo Familiar» en Facebook, Instagram y WhatsApp. El equipo tiene 4 personas y el dueño asegura que todos sabían qué hacer.",
+incident:"🚨 INCIDENTE: El post salió con el precio anterior del combo y el video no estaba listo a la hora de publicar. Nadie sabe quién debía subirlo.",
+controlPrompt:"Según las evidencias, ¿cuál es la falla principal?",
+controls:["El presupuesto de la campaña fue insuficiente","Las plataformas elegidas no eran las más adecuadas","Las tareas no tenían responsable ni fecha clara","La audiencia en redes era demasiado pequeña"],controlCorrect:2,
+testPrompt:"¿Qué medida corrige mejor el problema?",
+tests:["Aumentar el presupuesto de publicidad para el mes","Nombrar un Project Manager y un responsable por tarea","Publicar con más frecuencia en las tres redes sociales","Contratar un segundo editor de video para el equipo"],testCorrect:1,
+etapa:0,
+why:"Las evidencias muestran 6 tareas sin responsable, el rol de Project Manager vacío y fechas de entrega sin definir: todo eso se resuelve al planificar. El presupuesto y los seguidores no explican el problema.",
+evidence:[
+["📌","Tablero Kanban","Por hacer: 3<br>En proceso: 11<br>Listo: 0<br><b>Tareas sin responsable: 6</b>",true],
+["💰","Presupuesto","Presupuesto de campaña: Bs 800<br>Gastado hasta hoy: 35%",false],
+["💬","Chat del equipo","Lunes 10:12 — ¿Quién sube el video?<br>10:14 — Pensé que lo hacía el diseñador<br>10:15 — Yo creí que era el community manager",true],
+["👥","Lista de roles","Diseñador: asignado<br>Editor de video: asignado<br>Community Manager: asignado<br><b>Project Manager: SIN ASIGNAR</b>",true],
+["📈","Redes sociales","Facebook: 12.400 seguidores<br>Instagram: 8.900 seguidores<br>Crecimiento del mes: +3%",false],
+["🗓️","Cronograma","Publicación: viernes 18:00<br>Entrega del video: <b>SIN FECHA</b><br>Entrega del diseño: <b>SIN FECHA</b>",true]]},
+
+{title:"🥓 Pampeño",tag:"RECETAS · REVISIÓN",meta:"Serie de videos de recetas",
+context:"Pampeño lanza una serie de videos de recetas con sus embutidos para Instagram, Facebook y TikTok. El equipo tiene roles claros y un tablero ordenado; el responsable dice que el proyecto estaba muy bien organizado.",
+incident:"🚨 INCIDENTE: Se publicó un video con un error en la receta: decía 2 kg de jamón donde debía decir 200 g. Ya fue compartido más de 300 veces.",
+controlPrompt:"Según las evidencias, ¿cuál es la falla principal?",
+controls:["El equipo no tenía roles asignados desde el inicio","Las tareas no estaban ordenadas en un tablero","El cronograma no tenía fechas de entrega claras","Nadie aprobó el contenido antes de publicarlo"],controlCorrect:3,
+testPrompt:"¿Qué medida corrige mejor el problema?",
+tests:["Agregar una aprobación antes de cada publicación","Programar las publicaciones para el fin de semana","Reducir la cantidad de videos publicados por semana","Reemplazar al equipo completo por personal nuevo"],testCorrect:0,
+etapa:2,
+why:"Roles, tablero y fechas estaban en orden, pero el cronograma no tenía paso de revisión y nadie confirmó el texto de la receta. La falta de aprobación antes de publicar es una falla de la etapa de Revisión.",
+evidence:[
+["🎬","Métricas del video","Alcance: 14.000 vistas<br>Veces compartido: 312",false],
+["📌","Tablero Kanban","Listo: 9<br>En proceso: 0<br>Por hacer: 0<br><b>Todas las tareas tenían responsable y fecha</b>",true],
+["🗓️","Cronograma","Edición terminada: martes 20:00<br>Publicación: martes 20:30<br><b>Paso de revisión: NO EXISTE</b>",true],
+["📦","Catálogo de productos","Jamón cocido: Bs 38/kg<br>Salchicha parrillera: Bs 25/kg",false],
+["👥","Lista de roles","Project Manager: Lucía<br>Diseño: Marco<br>Edición: Rosa<br>Community Manager: Pedro<br><b>Todos los roles asignados</b>",true],
+["💬","Chat del equipo","20:25 Rosa: Video exportado, lo paso<br>20:28 Pedro: Subiendo ahora<br><b>Nadie confirma haber revisado la receta</b>",true]]},
+
+{title:"🛒 Hipermaxi",tag:"OFERTAS · TAREAS",meta:"Catálogo digital de ofertas semanales",
+context:"Hipermaxi prepara el catálogo digital de ofertas de la semana para web, app y redes. Un equipo de 4 personas recibió 18 piezas de contenido para producir en la misma semana.",
+incident:"🚨 INCIDENTE: Llegó el jueves y el catálogo estaba incompleto: 16 de las 18 piezas seguían a medias y dos ofertas salieron sin foto.",
+controlPrompt:"Según las evidencias, ¿cuál es la falla principal?",
+controls:["No se había asignado un responsable por tarea","Se empezaron demasiadas tareas al mismo tiempo","El catálogo no tenía una fecha de entrega fijada","El presupuesto semanal se agotó antes de tiempo"],controlCorrect:1,
+testPrompt:"¿Qué medida corrige mejor el problema?",
+tests:["Asignar un segundo Project Manager al proyecto","Adelantar al martes la entrega del catálogo web","Poner un límite de tareas en proceso por persona","Pedir las fotos de cada producto a los proveedores"],testCorrect:2,
+etapa:1,
+why:"Los roles y las fechas estaban bien definidos, pero cada persona tenía 4 o 5 tareas abiertas a la vez y casi nada llegó a «Listo». El problema apareció mientras se producía, por no limitar las tareas en proceso.",
+evidence:[
+["👥","Lista de roles","Project Manager: asignado<br>Diseño: asignado<br>Edición: asignado<br>Community Manager: asignado<br><b>Responsable en cada tarea: SÍ</b>",true],
+["🏆","Resultados anteriores","Ventas de ofertas de la semana pasada: +8%",false],
+["📌","Tablero Kanban","Por hacer: 0<br>En proceso: <b>16</b><br>Listo: 2<br>Cada persona tiene 4 o 5 tareas abiertas a la vez",true],
+["💰","Presupuesto","Presupuesto semanal: Bs 1.200<br>Gastado hasta hoy: 20%",false],
+["💬","Chat del equipo","Martes 09:30 Diseñador: Tengo 5 piezas empezadas, ninguna termina<br>Miércoles 16:00 Editor: Empecé 4 videos y no cerré ninguno",true],
+["🗓️","Cronograma","Entrega del catálogo: jueves 12:00<br><b>Fecha definida para cada pieza: SÍ</b>",true]]},
+
+{title:"💊 Farmacorp",tag:"CAMPAÑA · PUBLICACIÓN",meta:"Campaña de vitaminas por cambio de clima",
+context:"Farmacorp lanza una campaña de descuentos en vitaminas por el cambio de clima, con piezas para web, Instagram y WhatsApp. Todo el contenido se produjo a tiempo y fue aprobado por el dueño.",
+incident:"🚨 INCIDENTE: Los clientes recibieron mensajes contradictorios: la web decía «20% hasta el domingo», Instagram decía «15% hasta el sábado» y por WhatsApp llegó un descuento que ya había terminado.",
+controlPrompt:"Según las evidencias, ¿cuál es la falla principal?",
+controls:["No existía un calendario de publicación común","Las piezas no fueron aprobadas por el dueño","El equipo no terminó de producir las piezas","El stock de vitaminas no alcanzó para la demanda"],controlCorrect:0,
+testPrompt:"¿Qué medida corrige mejor el problema?",
+tests:["Aumentar el descuento para atraer más clientes","Producir las piezas con más días de anticipación","Enviar el mensaje por WhatsApp varias veces al día","Fijar una misma fecha de salida en todas las redes"],testCorrect:3,
+etapa:3,
+why:"La producción y la aprobación estaban completas; lo que falló fue la salida: web, Instagram y WhatsApp publicaron en fechas distintas y sin una fecha única acordada. Es una falla de la etapa de Publicación.",
+evidence:[
+["🧴","Inventario","Vitamina C 1000 mg: 340 unidades en stock",false],
+["✅","Registro de aprobación","Piezas aprobadas por el dueño: lunes 17:00<br>Web: APROBADO · Instagram: APROBADO · WhatsApp: APROBADO",true],
+["🗓️","Calendario de publicación","Web: miércoles 09:00<br>Instagram: viernes 18:00<br>WhatsApp: lunes siguiente<br><b>Fecha única de salida: NO DEFINIDA</b>",true],
+["📊","Visitas a la web","Visitas esta semana: 4.200",false],
+["💬","Chat del equipo","Community Manager: Subí lo de Instagram hoy<br>Community Manager: Por WhatsApp mando lo que hay en la carpeta<br><b>No sabía que la web ya tenía otro descuento</b>",true],
+["📌","Tablero Kanban","Listo: 9<br>En proceso: 0<br>Por hacer: 0<br>Todas las tareas con responsable y fecha",true]]},
+
+{title:"🏋️ Gimnasio Atlas",tag:"RETO 30 DÍAS · ALCANCE",meta:"Campaña «Reto de 30 días»",
+context:"El Gimnasio Atlas prepara el «Reto de 30 días» para atraer socios nuevos, con contenido en Instagram, TikTok y WhatsApp. El plan inicial era de 6 piezas, con un equipo de 4 personas y una semana de trabajo.",
+incident:"🚨 INCIDENTE: Llegó el día del lanzamiento y solo 7 de las 15 piezas estaban listas. El dueño dice que el equipo «no rindió».",
+controlPrompt:"Según las evidencias, ¿cuál es la falla principal?",
+controls:["Los roles del equipo no estaban asignados al inicio","El precio de la membresía era demasiado elevado","Había muy pocos socios para promocionar el reto","El trabajo creció sin ajustar fecha ni presupuesto"],controlCorrect:3,
+testPrompt:"¿Qué medida corrige mejor el problema?",
+tests:["Contratar más personal de edición para la semana","Fijar el alcance y analizar el impacto de cada cambio","Bajar la calidad de las piezas para ir más rápido","Publicar las piezas pendientes después del lanzamiento"],testCorrect:1,
+etapa:0,
+why:"Los roles estaban asignados y el cronograma no cambió, pero el dueño pasó de 6 a 15 piezas sin mover la fecha ni el presupuesto, y no existía un objetivo escrito ni un proceso para aceptar cambios. Eso se define al planificar: alcance, tiempo y costo.",
+evidence:[
+["💪","Socios actuales","Socios activos: 320<br>Bajas del último mes: 12",false],
+["📋","Pedidos del dueño","Lunes: 6 piezas<br>Martes: +4 piezas<br>Miércoles: +5 piezas<br><b>Fecha de entrega y presupuesto: sin cambios</b>",true],
+["👥","Lista de roles","Project Manager: asignado<br>Diseño: asignado<br>Edición: asignado<br>Community Manager: asignado<br><b>Responsable en cada tarea: SÍ</b>",true],
+["🏷️","Precios de membresía","Mensual: Bs 250<br>Trimestral: Bs 650",false],
+["🎯","Objetivo y alcance","Objetivo escrito: <b>NO DEFINIDO</b><br>Alcance acordado el lunes: 6 piezas<br>Proceso para aceptar cambios: <b>NO EXISTE</b>",true],
+["💬","Chat del equipo","Miércoles 23:20 Diseñador: ¿Entonces ya son 15? ¿Movemos la fecha?<br>Dueño: No, el viernes sale igual<br>Diseñador: Con el tiempo que tenemos no llegamos",true]]}
 ];
 
-const practicalLabs=[
-{modules:[{icon:"👤",title:"Usuarios y permisos",desc:"Revisa perfiles",screen:"Usuario: usr184\nRol: Auxiliar administrativo\nCONSULTA_HC = TRUE",actions:[{id:"access",label:"Consultar HC-7781",result:"La consulta es permitida y queda registrada como exitosa.",kind:"bad",evidence:"Usuario sin permiso clínico pudo consultar HC-7781."}]},{icon:"🖥️",title:"Registro de accesos",desc:"Busca trazabilidad",screen:"23:48 · usr184 · HC-7781\nResultado: CONSULTA EXITOSA",actions:[{id:"trace",label:"Revisar trazabilidad",result:"El log identifica usuario, hora e historia consultada.",kind:"good",evidence:"Existe trazabilidad del acceso."}]}]},
-{modules:[{icon:"📦",title:"Inventario",desc:"Prueba el control de stock",screen:"MED-001 · Paracetamol\nStock disponible: 5",actions:[{id:"oversell",label:"Vender 20 unidades",result:"La venta es aprobada y el stock queda en -15.",kind:"bad",evidence:"Se permitió vender 20 con stock 5."}]},{icon:"🧾",title:"Nueva venta",desc:"Observa el procesamiento",screen:"Producto: MED-001\nCantidad: 20\nStock: 5",actions:[{id:"process",label:"Procesar venta",result:"Venta aprobada sin alerta de stock insuficiente.",kind:"bad",evidence:"El procesamiento aceptó cantidad superior al stock."}]}]},
-{modules:[{icon:"📝",title:"Calificaciones",desc:"Prueba una modificación",screen:"Período 2026-I · CERRADO\nNota actual: 68",actions:[{id:"grade",label:"Cambiar 68 → 95",result:"El cambio se guarda sin autorización registrada.",kind:"bad",evidence:"Modificación posterior al cierre aceptada."}]},{icon:"🖥️",title:"Historial",desc:"Comprueba trazabilidad",screen:"18:15 · docente07\nCambio 68 → 95 · EXITOSO",actions:[{id:"history",label:"Revisar registro",result:"El sistema conserva usuario, hora y cambio.",kind:"good",evidence:"El cambio quedó registrado."}]}]},
-{modules:[{icon:"👤",title:"Empleados retirados",desc:"Compara estado y acceso",screen:"Carlos M. · Retiro 02/07/2026\nCuenta cmendoza: ACTIVA",actions:[{id:"retired",label:"Intentar acceso",result:"El sistema permite el acceso pese al retiro.",kind:"bad",evidence:"Cuenta de empleado retirado sigue activa."}]},{icon:"🔐",title:"Control de acceso",desc:"Revisa sincronización",screen:"RH → IAM\nEstado: ERROR",actions:[{id:"sync",label:"Revisar sincronización",result:"La sincronización presenta error y no deshabilitó la cuenta.",kind:"bad",evidence:"Falla de sincronización afecta la baja."}]}]},
-{modules:[{icon:"🧾",title:"Facturación",desc:"Prueba unicidad",screen:"Factura 000784\nEstado: REGISTRADA",actions:[{id:"duplicate",label:"Registrar 000784 otra vez",result:"La segunda factura se registra sin alerta.",kind:"bad",evidence:"Se permitió duplicar 000784."}]},{icon:"🖥️",title:"Logs de ventas",desc:"Comprueba alertas",screen:"14:05 · 000784 creada\n14:07 · 000784 creada\nAlertas: 0",actions:[{id:"alert",label:"Revisar alertas",result:"No existe alerta ante la duplicidad.",kind:"bad",evidence:"No se generó alerta por factura duplicada."}]}]}];
-
-let name="",company=null,companyIndex=null,opened=0,answers={control:false,test:false,verdict:false,controlIndex:null,testIndex:null,verdictValue:null},score=0,submitted=false,practicalTests={},practicalEvidence=[];
+let name="",company=null,companyIndex=null,openedList=[],answers=freshAnswers(),submitted=false;
+function freshAnswers(){return {control:false,test:false,verdict:false,controlIndex:null,testIndex:null,verdictValue:null};}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function show(id){["intro","choose","mission","final"].forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"});}
+
 function start(){
 const g=document.getElementById("groupName").value;
 name=document.getElementById("studentName").value.trim();
 if(!g){alert("Selecciona tu grupo.");return}
 if(!name){alert("Escribe los nombres de los integrantes.");return}
-const saved=JSON.parse(localStorage.getItem("auditLab_"+g)||"null");
-if(saved && saved.submitted){
-restoreSubmitted(saved);
-return;
-}
+const saved=JSON.parse(localStorage.getItem(STORAGE_PREFIX+g)||"null");
+if(saved && saved.submitted){restoreSubmitted(saved);return;}
 if(saved && saved.started){
-if(!confirm("Este grupo ya tiene una auditoría iniciada en este dispositivo. ¿Desean continuarla?")) return;
-restoreActive(saved);
-return;
+if(!confirm("Este grupo ya tiene un proyecto iniciado en este dispositivo. ¿Desean continuarlo?")) return;
+restoreActive(saved);return;
 }
-saveState({started:true,submitted:false,group:g,name,score:0});
+saveState({started:true,submitted:false,group:g,name});
 renderCompanies();show("choose");
 }
-function renderCompanies(){document.getElementById("companies").innerHTML=companies.map((c,i)=>`<div class="card company" onclick="selectCompany(${i})"><span class="tag">${c.tag}</span><h3>${c.title}</h3><p>${c.meta}</p><p>${c.context}</p><button class="secondary">AUDITAR ESTA EMPRESA →</button></div>`).join("");}
+function renderCompanies(){document.getElementById("companies").innerHTML=companies.map((c,i)=>`<div class="card company" onclick="selectCompany(${i})"><span class="tag">${c.tag}</span><h3>${c.title}</h3><p>${c.meta}</p><p>${c.context}</p><button class="secondary">RESCATAR ESTE PROYECTO →</button></div>`).join("");}
 function selectCompany(i){
-companyIndex=i; company=companies[i]; score=0; opened=0;
-practicalTests={}; practicalEvidence=[];
-answers={control:false,test:false,verdict:false,controlIndex:null,testIndex:null,verdictValue:null};
-saveState({started:true,submitted:false,group:document.getElementById("groupName").value,name,companyIndex:i,opened,answers,score});
+companyIndex=i;company=companies[i];openedList=[];answers=freshAnswers();
+saveState({started:true,submitted:false,group:document.getElementById("groupName").value,name,companyIndex:i,openedList,answers});
 renderMission();show("mission");
 }
 function renderMission(){
-const headerScore=document.getElementById("headerScore");
-const livePoints=document.getElementById("livePoints");
-if(headerScore) headerScore.textContent=`PROGRESO`;
-if(livePoints) livePoints.textContent=`EN ANÁLISIS`;
+document.getElementById("headerScore").textContent="PROGRESO";
+document.getElementById("livePoints").textContent="EN ANÁLISIS";
 document.getElementById("missionNo").textContent=`MISIÓN · ${company.tag}`;
 document.getElementById("missionTitle").textContent=company.title;
 document.getElementById("missionMeta").textContent=company.meta;
@@ -337,240 +348,164 @@ document.getElementById("context").innerHTML=`<p>${company.context}</p>`;
 document.getElementById("incident").innerHTML=company.incident;
 document.getElementById("evidence").innerHTML=company.evidence.map((e,i)=>`<div class="card evidence" onclick="openEvidence(${i})"><div style="font-size:25px">${e[0]}</div><h3>${e[1]}</h3><p>Haz clic para revisar</p><small>EVIDENCIA ${i+1}</small></div>`).join("");
 document.getElementById("detail").className="note hidden";
-practicalTests=practicalTests||{}; practicalEvidence=practicalEvidence||[]; renderPracticalLab();
 document.getElementById("controlPrompt").textContent=company.controlPrompt;
 document.getElementById("controlOptions").innerHTML=company.controls.map((x,i)=>`<div class="option" onclick="pick('control',${i},this)">${String.fromCharCode(65+i)}. ${x}</div>`).join("");
-// Las pruebas ahora se realizan en el laboratorio práctico.
-const testPromptEl=document.getElementById("testPrompt");
-if(testPromptEl) testPromptEl.textContent="Ejecuta una prueba real en el módulo del sistema.";
-document.getElementById("verdictOptions").innerHTML=[["yes","🟢 El control cumple"],["partial","🟡 Cumple parcialmente"],["no","🔴 El control no cumple"]].map(x=>`<div class="option" onclick="pickVerdict('${x[0]}',this)">${x[1]}</div>`).join("");
-["condition","criterion","cause","effect","recommendation"].forEach(x=>document.getElementById(x).value="");
-["controlFeedback","testFeedback","verdictFeedback","submitMsg"].forEach(id=>{const el=document.getElementById(id);if(el)el.className="note hidden";});setupCharacterCounters();
+document.getElementById("testPrompt").textContent=company.testPrompt;
+document.getElementById("testOptions").innerHTML=company.tests.map((x,i)=>`<div class="option" onclick="pick('test',${i},this)">${String.fromCharCode(65+i)}. ${x}</div>`).join("");
+document.getElementById("verdictOptions").innerHTML=STAGES.map((s,i)=>`<div class="option" onclick="pickVerdict(${i},this)">${i+1}. <b>${s}</b> — ${STAGE_DESC[i]}</div>`).join("");
+FIELDS.forEach(x=>document.getElementById(x).value="");
+["controlFeedback","testFeedback","verdictFeedback","submitMsg"].forEach(id=>document.getElementById(id).className="note hidden");
+setupCharacterCounters();
 }
 function openEvidence(i){
-if(!company) return;
-if(!document.querySelectorAll(".evidence")[i].classList.contains("opened")) opened++;
-let e=company.evidence[i];
-let d=document.getElementById("detail");
+if(!company)return;
+const cards=document.querySelectorAll(".evidence");
+if(!openedList.includes(i))openedList.push(i);
+const e=company.evidence[i];
+const d=document.getElementById("detail");
 d.className="note";d.innerHTML=`<b>${e[0]} ${e[1]}</b><br><br>${e[2]}`;
-document.querySelectorAll(".evidence")[i].classList.add("opened");
-saveCurrentState(); updateBar();
+cards[i].classList.add("opened");
+saveCurrentState();updateBar();
 }
 function pick(type,i,el){
 if(answers[type])return;
 answers[type]=true;
-if(type==="control") answers.controlIndex=i;
-if(type==="test") answers.testIndex=i;
+if(type==="control")answers.controlIndex=i;else answers.testIndex=i;
 el.classList.add("selected");
-const f=document.getElementById(type==="control"?"controlFeedback":"testFeedback");
-if(f) f.className="note hidden";
-if(type==="control" && i===company.controlCorrect) score+=4;
-saveCurrentState(); updateScore(); updateBar();
+saveCurrentState();updateBar();
 }
 function pickVerdict(v,el){
-// Mientras el grupo NO haya enviado la auditoría, puede cambiar su dictamen.
-// Solo se bloquea definitivamente después de ENVIAR AUDITORÍA.
-if(submitted)return;
-
-// Si ya había elegido otro dictamen, quitar el punto anterior si era correcto.
-if(answers.verdictValue!==null && answers.verdictValue!==undefined){
-  if(answers.verdictValue===company.verdict) score=Math.max(0,score-4);
-}
-
-answers.verdict=true;
-answers.verdictValue=v;
-
-document.querySelectorAll("#verdictOptions .option").forEach(x=>x.classList.remove("selected"));
+if(answers.verdict)return;
+answers.verdict=true;answers.verdictValue=v;
 el.classList.add("selected");
-
-if(v===company.verdict) score+=4;
-document.getElementById("verdictFeedback").className="note hidden";
-saveCurrentState(); updateScore(); updateBar();
+saveCurrentState();updateBar();
 }
-function renderPracticalLab(){const labs=practicalLabs[companyIndex]||{modules:[]};const box=document.getElementById("auditModules");if(!box)return;box.innerHTML=labs.modules.map((m,i)=>`<button type="button" class="audit-module ${i===0?"active":""}" onclick="openLabModule(${i})"><span class="icon">${m.icon}</span><b>${m.title}</b><small>${m.desc}</small></button>`).join("");openLabModule(0);}
-function openLabModule(i){const labs=practicalLabs[companyIndex]||{modules:[]};const m=labs.modules[i];if(!m)return;document.querySelectorAll(".audit-module").forEach((b,j)=>b.classList.toggle("active",j===i));const actions=m.actions.map(a=>`<button type="button" onclick="runAuditTest('${a.id}')">🧪 ${a.label}</button>`).join("");document.getElementById("auditPanel").innerHTML=`<span class="test-badge">MÓDULO · ${m.title.toUpperCase()}</span><h3>${m.icon} ${m.title}</h3><p>${m.desc}</p><div class="audit-screen">${m.screen.replace(/\n/g,"<br>")}</div><div class="audit-action">${actions}</div><div id="auditResult"></div>`;}
-function runAuditTest(id){const labs=practicalLabs[companyIndex]||{modules:[]};let action=null,moduleTitle="";for(const m of labs.modules){const a=m.actions.find(x=>x.id===id);if(a){action=a;moduleTitle=m.title;break;}}if(!action)return;practicalTests[id]={module:moduleTitle,label:action.label,result:action.result,kind:action.kind};if(!practicalEvidence.includes(action.evidence))practicalEvidence.push(action.evidence);const el=document.getElementById("auditResult");if(el)el.innerHTML=`<div class="audit-result ${action.kind}"><b>PRUEBA EJECUTADA</b><br>${action.result}<br><br><b>Evidencia obtenida:</b> ${action.evidence}</div>`;saveCurrentState();updateBar();}
-function updateScore(){document.getElementById("headerScore").textContent=`PROGRESO`;document.getElementById("livePoints").textContent=`EN ANÁLISIS`;}
-function updateBar(){let pct=Math.min(100,(opened/4)*20+(answers.control?20:0)+(Object.keys(practicalTests||{}).length?20:0)+(answers.verdict?20:0));document.getElementById("bar").style.width=pct+"%";}
+function updateBar(){
+const pct=Math.min(25,(openedList.length/3)*25)+(answers.control?25:0)+(answers.test?25:0)+(answers.verdict?25:0);
+document.getElementById("bar").style.width=pct+"%";
+}
+function computeScore(){
+const usefulOpened=openedList.filter(i=>company.evidence[i][3]).length;
+return usefulOpened*2
++(answers.controlIndex===company.controlCorrect?6:0)
++(answers.testIndex===company.testCorrect?6:0)
++(answers.verdictValue===company.etapa?4:0);
+}
 async function submitMission(){
-let vals=["condition","criterion","cause","effect","recommendation"].map(x=>document.getElementById(x).value.trim());
-let group=document.getElementById("groupName").value;
-if(opened<2||!answers.control||!answers.verdict||Object.keys(practicalTests||{}).length<1){
-let m=document.getElementById("submitMsg");m.className="note bad";m.textContent="Antes de finalizar: revisa al menos 2 evidencias, identifica el control, ejecuta al menos 1 prueba real y emite tu dictamen.";return}
-if(vals.some(v=>v.length<30)){
-let m=document.getElementById("submitMsg");m.className="note bad";m.textContent="Cada parte del papel de trabajo debe tener al menos 30 caracteres. Explica tus respuestas con base en las evidencias.";return}
+const vals=FIELDS.map(x=>document.getElementById(x).value.trim());
+const group=document.getElementById("groupName").value;
+const m=document.getElementById("submitMsg");
+if(openedList.length<3||!answers.control||!answers.test||!answers.verdict){
+m.className="note bad";m.textContent="Antes de finalizar: revisa al menos 3 evidencias y completa las tres decisiones de análisis.";return}
+const short=FIELDS.find((f,i)=>vals[i].length<MIN[f]);
+if(short){
+m.className="note bad";m.textContent=short==="recommendation"?"El plan de corrección debe tener al menos 80 caracteres: escribe tu tablero con tareas, responsables y plataformas.":"Cada parte del papel de trabajo debe tener al menos 30 caracteres. Explica tus respuestas con base en las evidencias.";return}
 
-if(Object.keys(practicalTests||{}).length>0 && !answers.practicalScored){score+=4;answers.practicalScored=true;}
-score+=4;
+const score=computeScore();
 const payload={
 timestamp:new Date().toISOString(),grupo:group,integrantes:name,empresa:company.title,categoria:company.tag,puntos:score,
 control_correcto:answers.controlIndex===company.controlCorrect,test_correcta:answers.testIndex===company.testCorrect,
-dictamen_correcto:answers.verdictValue===company.verdict,evidencias_revisadas:opened,pruebas_reales:Object.values(practicalTests||{}).map(x=>x.label).join(" | "),evidencias_prueba:practicalEvidence.join(" | "),
+dictamen_correcto:answers.verdictValue===company.etapa,evidencias_revisadas:openedList.length,
 condicion:vals[0],criterio:vals[1],causa:vals[2],efecto:vals[3],recomendacion:vals[4],
-dictamen:company.verdict==="no"?"NO CUMPLE":"CUMPLE"
+dictamen:STAGES[answers.verdictValue]
 };
-
-const msg=document.getElementById("submitMsg");
-msg.className="note warn";msg.textContent="📤 Registrando auditoría...";
+m.className="note warn";m.textContent="📤 Registrando entrega...";
 try{
 if(GOOGLE_SCRIPT_URL!=="PEGAR_AQUI_URL_DE_APPS_SCRIPT"){
 await fetch(GOOGLE_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
 }
 submitted=true;
-const saved={started:true,submitted:true,group,name,companyIndex,opened,answers,score,vals,payload};
-localStorage.setItem("auditLab_"+group,JSON.stringify(saved));
-
-document.getElementById("finalIntro").textContent=`${group} · ${name} · ${company.title}`;
-document.getElementById("finalScore").textContent=`${score}/20`;
-document.getElementById("finalBreakdown").innerHTML=`Resultado obtenido al finalizar la auditoría. El puntaje se revela únicamente ahora.`;
-document.getElementById("finalVerdict").textContent=company.verdict==="no"?"🔴 CONTROL NO CUMPLE":company.verdict==="partial"?"🟡 CUMPLE PARCIALMENTE":"🟢 CONTROL CUMPLE";
-document.getElementById("finalSummary").textContent="Ahora puedes comparar tus decisiones con las respuestas sustentadas por las evidencias del caso.";
-document.getElementById("finalReview").innerHTML=buildFinalReview(vals);
-msg.className="note good";msg.textContent="✅ Auditoría registrada correctamente.";
+localStorage.setItem(STORAGE_PREFIX+group,JSON.stringify({started:true,submitted:true,group,name,companyIndex,openedList,answers,score,vals,payload}));
+fillFinal(group,score,vals);
+m.className="note good";m.textContent="✅ Entrega registrada correctamente.";
 show("final");
 }catch(err){
-msg.className="note bad";msg.textContent="❌ No se pudo registrar la auditoría. No cierres la página y avisa al docente.";
+m.className="note bad";m.textContent="❌ No se pudo registrar la entrega. No cierres la página y avisa al docente.";
 }
 }
-
+function fillFinal(group,score,vals){
+document.getElementById("finalIntro").textContent=`${group} · ${name} · ${company.title}`;
+document.getElementById("finalScore").textContent=`${score}/24`;
+document.getElementById("finalBreakdown").innerHTML="Puntaje de evidencias y decisiones. Los <b>16 puntos</b> del papel de trabajo los asigna el docente al revisar tu redacción. Total posible: 40.";
+document.getElementById("finalVerdict").textContent=`🎯 ${STAGES[company.etapa]}`;
+document.getElementById("finalSummary").textContent="Compara tus decisiones con las que sustentan las evidencias del caso.";
+document.getElementById("finalReview").innerHTML=buildFinalReview(vals);
+}
 function buildFinalReview(vals){
-const c=company.controlCorrect, t=company.testCorrect, v=company.verdict;
-const chosenC=answers.controlIndex, chosenT=answers.testIndex, chosenV=answers.verdictValue;
-const controlText=company.controls[chosenC]||"Sin respuesta";
-const correctControl=company.controls[c];
-const testText=company.tests[chosenT]||"Sin respuesta";
-const correctTest=company.tests[t];
-const verdictText={yes:"🟢 El control cumple",partial:"🟡 Cumple parcialmente",no:"🔴 El control no cumple"};
+const c=company.controlCorrect,t=company.testCorrect,e=company.etapa;
+const chosenC=answers.controlIndex,chosenT=answers.testIndex,chosenE=answers.verdictValue;
+const stageText=i=>(i===null||i===undefined)?"Sin respuesta":`${STAGES[i]} — ${STAGE_DESC[i]}`;
+const v=vals||["","","","",""];
 return `<div class="answer-review">
-<div class="answer-item"><strong>1. Control</strong><span class="chosen">Tu respuesta: ${controlText}</span><br><span class="right">Respuesta sustentada: ${correctControl}</span></div>
-<div class="answer-item"><strong>2. Prueba</strong><span class="chosen">Tu respuesta: ${testText}</span><br><span class="right">Prueba sustentada: ${correctTest}</span></div>
-<div class="answer-item"><strong>3. Dictamen</strong><span class="chosen">Tu respuesta: ${verdictText[chosenV]||"Sin respuesta"}</span><br><span class="right">Dictamen sustentado: ${verdictText[v]}</span></div>
-<div class="answer-item"><strong>4. Evidencias revisadas</strong>${opened} de ${company.evidence.length}</div><div class="answer-item"><strong>5. Pruebas reales ejecutadas</strong>${Object.values(practicalTests||{}).map(x=>`<p>🧪 ${x.label}<br><span class="right">${x.result}</span></p>`).join("")||"Sin prueba registrada"}</div>
-<div class="answer-item"><strong>6. Papel de trabajo</strong><p><b>Condición:</b> ${vals[0]}</p><p><b>Criterio:</b> ${vals[1]}</p><p><b>Causa:</b> ${vals[2]}</p><p><b>Efecto:</b> ${vals[3]}</p><p><b>Recomendación:</b> ${vals[4]}</p></div>
+<div class="answer-item"><strong>1. Diagnóstico</strong><span class="chosen">Tu respuesta: ${company.controls[chosenC]||"Sin respuesta"}</span><br><span class="right">Respuesta sustentada: ${company.controls[c]}</span></div>
+<div class="answer-item"><strong>2. Medida correctiva</strong><span class="chosen">Tu respuesta: ${company.tests[chosenT]||"Sin respuesta"}</span><br><span class="right">Medida sustentada: ${company.tests[t]}</span></div>
+<div class="answer-item"><strong>3. Etapa</strong><span class="chosen">Tu respuesta: ${stageText(chosenE)}</span><br><span class="right">Etapa sustentada: ${stageText(e)}</span><span class="why">${company.why}</span></div>
+<div class="answer-item"><strong>4. Evidencias revisadas</strong>${openedList.length} de ${company.evidence.length}</div>
+<div class="answer-item"><strong>5. Papel de trabajo</strong><p><b>Diagnóstico:</b> ${esc(v[0])}</p><p><b>Cómo debería funcionar:</b> ${esc(v[1])}</p><p><b>Causa:</b> ${esc(v[2])}</p><p><b>Impacto:</b> ${esc(v[3])}</p><p><b>Plan de corrección:</b> ${esc(v[4])}</p></div>
 </div>`;
 }
-
 function setupCharacterCounters(){
-const ids=["condition","criterion","cause","effect","recommendation"];
-ids.forEach(id=>{
-  const el=document.getElementById(id), counter=document.getElementById(id+"Count");
-  if(!el||!counter)return;
-  const update=()=>{
-    const n=el.value.trim().length;
-    counter.textContent=n+"/30";
-    counter.className="char-counter "+(n>=30?"ok":"low");
-  };
-  el.addEventListener("input",update);
-  update();
+FIELDS.forEach(id=>{
+const el=document.getElementById(id),counter=document.getElementById(id+"Count");
+if(!el||!counter)return;
+const update=()=>{const n=el.value.trim().length;counter.textContent=n+"/"+MIN[id];counter.className="char-counter "+(n>=MIN[id]?"ok":"low");};
+el.oninput=update;update();
 });
 }
 function saveCurrentState(){
 const group=document.getElementById("groupName")?.value;
 if(!group||!company)return;
-const vals=["condition","criterion","cause","effect","recommendation"].map(x=>document.getElementById(x)?.value||"");
-localStorage.setItem("auditLab_"+group,JSON.stringify({started:true,submitted:false,group,name,companyIndex,opened,answers,score,vals,practicalTests,practicalEvidence}));
+const vals=FIELDS.map(x=>document.getElementById(x)?.value||"");
+localStorage.setItem(STORAGE_PREFIX+group,JSON.stringify({started:true,submitted:false,group,name,companyIndex,openedList,answers,vals}));
 }
-function saveState(x){localStorage.setItem("auditLab_"+x.group,JSON.stringify(x));}
+function saveState(x){localStorage.setItem(STORAGE_PREFIX+x.group,JSON.stringify(x));}
 function restoreActive(saved){
-name=saved.name; companyIndex=saved.companyIndex; company=companies[companyIndex]; opened=saved.opened||0; answers=saved.answers||answers; score=saved.score||0;practicalTests=saved.practicalTests||{};practicalEvidence=saved.practicalEvidence||[];
-document.getElementById("studentName").value=name; document.getElementById("groupName").value=saved.group;
-renderMission(); show("mission");
-(saved.vals||[]).forEach((v,i)=>{const id=["condition","criterion","cause","effect","recommendation"][i];if(document.getElementById(id))document.getElementById(id).value=v;});
-if(company) [...document.querySelectorAll(".evidence")].forEach((el,i)=>{if(i<opened)el.classList.add("opened");});
-restoreSelections(); updateScore(); updateBar();
+name=saved.name;companyIndex=saved.companyIndex;
+document.getElementById("studentName").value=name;document.getElementById("groupName").value=saved.group;
+if(companyIndex===undefined||companyIndex===null){renderCompanies();show("choose");return;}
+company=companies[companyIndex];openedList=saved.openedList||[];answers=saved.answers||freshAnswers();
+renderMission();show("mission");
+(saved.vals||[]).forEach((v,i)=>{const el=document.getElementById(FIELDS[i]);if(el)el.value=v;});
+setupCharacterCounters();
+const cards=document.querySelectorAll(".evidence");
+openedList.forEach(i=>cards[i]&&cards[i].classList.add("opened"));
+restoreSelections();updateBar();
 }
 function restoreSelections(){
-if(answers.controlIndex!==null&&answers.controlIndex!==undefined) document.querySelectorAll("#controlOptions .option")[answers.controlIndex]?.classList.add("selected");
-// Las pruebas se realizan mediante el laboratorio práctico; no se restaura un selector antiguo.
-if(answers.verdictValue){const map={yes:0,partial:1,no:2};document.querySelectorAll("#verdictOptions .option")[map[answers.verdictValue]]?.classList.add("selected");}
+if(answers.controlIndex!==null&&answers.controlIndex!==undefined)document.querySelectorAll("#controlOptions .option")[answers.controlIndex]?.classList.add("selected");
+if(answers.testIndex!==null&&answers.testIndex!==undefined)document.querySelectorAll("#testOptions .option")[answers.testIndex]?.classList.add("selected");
+if(answers.verdictValue!==null&&answers.verdictValue!==undefined)document.querySelectorAll("#verdictOptions .option")[answers.verdictValue]?.classList.add("selected");
 }
 function restoreSubmitted(saved){
-name=saved.name;companyIndex=saved.companyIndex;company=companies[companyIndex];opened=saved.opened||0;answers=saved.answers||answers;score=saved.score||0;practicalTests=saved.practicalTests||{};practicalEvidence=saved.practicalEvidence||[];
+name=saved.name;companyIndex=saved.companyIndex;company=companies[companyIndex];openedList=saved.openedList||[];answers=saved.answers||freshAnswers();
 document.getElementById("studentName").value=name;document.getElementById("groupName").value=saved.group;
-document.getElementById("finalIntro").textContent=`${saved.group} · ${name} · ${company.title}`;
-document.getElementById("finalScore").textContent=`${score}/20`;
-document.getElementById("finalBreakdown").textContent="Esta auditoría ya fue enviada. El resultado se conserva aunque se recargue la página.";
-document.getElementById("finalVerdict").textContent=company.verdict==="no"?"🔴 CONTROL NO CUMPLE":company.verdict==="partial"?"🟡 CUMPLE PARCIALMENTE":"🟢 CONTROL CUMPLE";
-document.getElementById("finalSummary").textContent="Las respuestas y la retroalimentación ya fueron reveladas al finalizar.";
-document.getElementById("finalReview").innerHTML=buildFinalReview(saved.vals||["","","","",""]);
+fillFinal(saved.group,saved.score||0,saved.vals);
+document.getElementById("finalBreakdown").innerHTML="Esta entrega ya fue enviada. Los <b>16 puntos</b> del papel de trabajo los asigna el docente. Total posible: 40.";
 show("final");
 }
 
 const reviewData={
-entrada:{
-title:"📥 ¿Qué es una ENTRADA?",
-text:"Es la información, dato, documento o evento que ingresa a un sistema o proceso para ser utilizado posteriormente. En auditoría se revisa si la entrada es válida, completa, autorizada y está correctamente registrada.",
-example:"En una farmacia, una receta médica puede ser una entrada para registrar la dispensación de un medicamento. El auditor puede comprobar si contiene los datos requeridos y si fue ingresada por un usuario autorizado."
-},
-procesamiento:{
-title:"⚙️ ¿Qué es el PROCESAMIENTO?",
-text:"Es el conjunto de operaciones que el sistema o proceso realiza sobre las entradas: valida, calcula, clasifica, transforma, compara o registra información. El auditor revisa si estas reglas se aplican correctamente.",
-example:"Si el sistema recibe una venta de medicamentos, puede comprobar el stock, calcular el importe y descontar la cantidad vendida. El auditor puede probar si el sistema realiza esas operaciones de acuerdo con las reglas establecidas."
-},
-salida:{
-title:"📤 ¿Qué es una SALIDA?",
-text:"Es la información, resultado o documento que produce un sistema después del procesamiento. Una salida puede ser una factura, reporte, alerta, comprobante o registro.",
-example:"Después de registrar una venta, el sistema genera una factura y actualiza el reporte de inventario. El auditor puede comprobar si ambos resultados coinciden con la operación realizada."
-},
-preventivo:{
-title:"🛡️ ¿Qué es un CONTROL PREVENTIVO?",
-text:"Es un control diseñado para actuar antes de que ocurra un error, fraude o situación no deseada. Su objetivo es reducir la posibilidad de que el evento ocurra.",
-example:"El sistema impide registrar una venta cuando el usuario no tiene permisos suficientes. El control intenta evitar la operación no autorizada antes de que se complete."
-},
-detectivo:{
-title:"👁️ ¿Qué es un CONTROL DETECTIVO?",
-text:"Es un control diseñado para identificar un error, irregularidad o evento después de que puede haber ocurrido. Su valor está en detectar oportunamente la situación.",
-example:"Un reporte diario identifica ventas realizadas con precios fuera del rango permitido. El control no evita necesariamente la venta, pero ayuda a descubrir operaciones que deben revisarse."
-},
-correctivo:{
-title:"🔧 ¿Qué es un CONTROL CORRECTIVO?",
-text:"Es un control que actúa después de detectar un problema para corregirlo, contenerlo o reducir sus efectos.",
-example:"Después de detectar un registro de inventario incorrecto, se corrige el saldo, se documenta el ajuste y se revisa la causa del error."
-},
-riesgo:{
-title:"🔴 ¿Qué es un RIESGO?",
-text:"Es una situación o evento que podría afectar la información, los procesos o los objetivos de una organización. En auditoría preguntamos qué podría salir mal y qué consecuencia tendría.",
-example:"Ejemplo: si cualquier empleado pudiera consultar historias clínicas sin autorización, existe el riesgo de acceso no autorizado y exposición de información confidencial."
-},
-control:{
-title:"🛡️ ¿Qué es un CONTROL?",
-text:"Es una medida, regla o mecanismo diseñado para prevenir, detectar o corregir un riesgo. Un control puede existir en una política, un procedimiento o dentro de un sistema.",
-example:"Ejemplo: el sistema exige usuario, contraseña y permisos antes de permitir consultar una historia clínica."
-},
-evidencia:{
-title:"📄 ¿Qué es una EVIDENCIA?",
-text:"Es la información que el auditor obtiene y utiliza para sustentar una conclusión. Debe ser relevante para la prueba que se está realizando; no todo documento o dato demuestra que un control funciona.",
-example:"Ejemplo: un registro de accesos puede mostrar quién consultó una historia clínica, cuándo la consultó y con qué usuario."
-},
-prueba:{
-title:"🧪 ¿Qué es una PRUEBA?",
-text:"Es el procedimiento que realiza el auditor para comprobar si un control existe y funciona como se espera. La prueba debe relacionarse directamente con el riesgo y el control.",
-example:"Ejemplo: intentar acceder con un usuario que no tiene permiso y verificar si el sistema bloquea el acceso y registra el intento."
-},
-resultado:{
-title:"📊 ¿Qué es un RESULTADO?",
-text:"Es lo que se obtiene después de aplicar la prueba y analizar la evidencia. Permite determinar si el control funcionó, no funcionó o si la evidencia disponible no permite concluir.",
-example:"Ejemplo: el usuario sin permiso fue bloqueado y el intento quedó registrado. El resultado indica que el control respondió como estaba diseñado."
-},
-hallazgo:{
-title:"⚠️ ¿Qué es un HALLAZGO?",
-text:"Es una situación identificada por el auditor que debe documentarse con evidencia y compararse con un criterio. Un hallazgo debe explicar qué se encontró, por qué importa y qué debería mejorarse.",
-example:"Ejemplo: se detectaron tres accesos fuera de horario realizados con cuentas que no tenían autorización documentada. Esto debe sustentarse con los registros y analizarse frente a la política de acceso."
-}
+scrum:{title:"🔁 ¿Qué es SCRUM?",text:"Forma de trabajar en bloques cortos (sprints) de 1 a 2 semanas, mostrando avances y revisándolos seguido en lugar de esperar al final.",example:"Pollos El Solar cierra cada semana con 3 posts listos y revisa qué mejorar la semana siguiente."},
+kanban:{title:"📌 ¿Qué es KANBAN?",text:"Tablero visual con columnas (Por hacer, En proceso, Listo) donde cada tarjeta es una tarea. Permite ver de un vistazo qué falta y quién lo tiene.",example:"Si hay 16 tarjetas en «En proceso» y solo 2 en «Listo», el equipo está empezando más de lo que termina."},
+roles:{title:"👥 ¿Qué son los ROLES?",text:"Responsabilidades claras dentro del equipo: Project Manager, diseñador, editor de video y community manager.",example:"Si nadie sabe quién sube el video, esa tarea no tiene responsable y queda en el aire."},
+planificacion:{title:"🗓️ PLANIFICACIÓN",text:"Se define antes de producir: objetivo, cronograma, presupuesto y quién hace qué.",example:"Definir que el video queda listo el lunes y el post el martes, cada uno con su responsable."},
+produccion:{title:"🎬 PRODUCCIÓN",text:"Es cuando se crea el material. Se cuida que las tareas avancen y se terminen, sin acumular trabajo a medias.",example:"El editor termina un video antes de empezar el siguiente."},
+revision:{title:"✅ REVISIÓN",text:"Paso previo a publicar: alguien distinto de quien creó el contenido lo aprueba.",example:"El dueño revisa el precio y el texto del post antes de que se suba."},
+publicacion:{title:"📣 PUBLICACIÓN",text:"El contenido sale al público en el momento planificado y de forma coordinada entre plataformas.",example:"Web, Instagram y WhatsApp salen el mismo día con el mismo mensaje y el mismo descuento."},
+sintoma:{title:"🚨 1 · Síntoma",text:"Es lo que se ve que salió mal: un retraso, un error, un mensaje contradictorio. Todavía no explica por qué ocurrió.",example:"El post salió con el precio viejo."},
+evidencia:{title:"📄 2 · Evidencia",text:"Son los documentos y datos que muestran qué pasó: tablero, chat, cronograma, lista de roles. Algunos explican el problema y otros solo distraen.",example:"El chat donde dos personas creen que el otro sube el video."},
+diagnostico:{title:"🔍 3 · Diagnóstico",text:"Es la conclusión sobre qué falló, apoyada en las evidencias. Se descartan las explicaciones que las evidencias contradicen.",example:"Si todas las tareas tienen responsable, el problema no son los roles."},
+causa:{title:"🧩 4 · Causa",text:"Es la razón de fondo por la que falló. Si las evidencias no alcanzan para afirmarla, se dice.",example:"No existía un paso de revisión antes de publicar."},
+impacto:{title:"💥 5 · Impacto",text:"Es la consecuencia para el negocio: clientes confundidos, ventas perdidas, mala imagen.",example:"Clientes que llegan reclamando un descuento que ya terminó."},
+correccion:{title:"🛠️ 6 · Corrección",text:"Es el plan para que no se repita: una medida concreta y un tablero corregido con tareas, responsables y plataformas.",example:"«Aprobar el post — Dueño — Instagram» como tarea previa a publicar."}
 };
-
 function showReview(key,btn){
-document.querySelectorAll('.review-step').forEach(b=>b.classList.remove('active'));
-if(btn) btn.classList.add('active');
+document.querySelectorAll('.review-step,.review-card').forEach(b=>b.classList.remove('active'));
+if(btn)btn.classList.add('active');
 const d=reviewData[key];
-document.getElementById('reviewPanel').innerHTML=
-`<h3>${d.title}</h3><p>${d.text}</p><div class="example"><b>💡 Ejemplo claro:</b> ${d.example}</div>`;
+document.getElementById('reviewPanel').innerHTML=`<h3>${d.title}</h3><p>${d.text}</p><div class="example"><b>💡 Ejemplo claro:</b> ${d.example}</div>`;
 }
-
-window.addEventListener("load",()=>{
-const group=document.getElementById("groupName")?.value;
-});
-window.addEventListener("beforeunload",()=>{ if(company && !submitted) saveCurrentState(); });
+window.addEventListener("beforeunload",()=>{if(company&&!submitted)saveCurrentState();});
 </script>
 </body>
 </html>
